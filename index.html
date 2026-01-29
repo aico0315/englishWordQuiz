@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/destyle.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+
+  <title>My単語帳!!</title>
+</head>
+<body>
+  <header>
+    <h1 class="web_title">STUDY</h1>
+  </header>
+  <main>
+    <div id="question-view" class="question-area">
+      <div class="counter-area"></div>
+      <p class="set-question"></p>
+      <input class="input-answer" name="user-input" type="text">
+      <button class="judgement-answer-btn">答え</button>
+    </div>
+    <div id="answer-view" class="answer-area hidden">
+      <p class="result-message"></p>
+      <p class="correct-answer-title">こたえ</p>
+      <p class="correct-answer"></p>
+      <p class="supplement-message"></p>
+      <p class="user-answer-title">あなたのこたえ</p>
+      <p class="user-answer"></p>
+      <button class="next-question-btn">次の問題</button>
+    </div>
+    <div id="clear-view" class="clear-area hidden">
+      <p class="clear-message">全問回答</p>
+      <p class="clear-text">全問回答しました<br>もう一度挑戦しますか？</p>
+      <button class="retry-btn">挑戦する</button>
+    </div>
+  </main>
+  <footer></footer>
+</body>
+</html>
