@@ -264,6 +264,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
       }
 });
 
+//PC向けのEnterキー判定
 inputAnswer.addEventListener("keydown", (event)=> {
   if(event.isComposing){
     return;
@@ -272,6 +273,10 @@ inputAnswer.addEventListener("keydown", (event)=> {
   if(event.key === "Enter"){
     answerAreaDisplay();
   }
+})
+
+inputAnswer.addEventListener("compositionend", (event)=> {
+  answerAreaDisplay();
 })
 
 //答えbtnクリック
