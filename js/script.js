@@ -230,7 +230,7 @@ function answerAreaDisplay (savedIndex, savedResult, savedUserAnswer){
 }
 
 
-//Btnクリックイベント
+//イベント
 
 shuffleQuestions();
 
@@ -264,12 +264,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
       }
 });
 
+inputAnswer.addEventListener("keydown", (event)=> {
+  if(event.isComposing){
+    return;
+  }
+
+  if(event.key === "Enter"){
+    answerAreaDisplay();
+  }
+})
+
 //答えbtnクリック
-judgementAnswerBtn.addEventListener("click", ()=>{
+judgementAnswerBtn.addEventListener("click", ()=> {
   answerAreaDisplay();
 });
 
-
+//次の問題Btnクリック
 nextQuestionBtn.addEventListener("click", ()=> {
   if(!hasNextQuestion()){
     clearViewDisplay();
@@ -281,6 +291,7 @@ nextQuestionBtn.addEventListener("click", ()=> {
   saveData();
 });
 
+//リトライBtnクリック
 retryBtn.addEventListener("click", ()=> {
   currentIndex = 0;
   shuffleQuestions();
