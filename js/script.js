@@ -5,6 +5,7 @@ import { wordRecords } from './data.js';
 const questionArea = document.querySelector(".question-area");
 const counterArea = document.querySelector(".counter-area");
 const setQuestion = document.querySelector(".set-question");
+const answerForm = document.getElementById("answer-form");
 const inputAnswer = document.querySelector(".input-answer");
 const judgementAnswerBtn = document.querySelector(".judgement-answer-btn");
 
@@ -209,21 +210,26 @@ document.addEventListener("DOMContentLoaded", ()=>{
       }
 });
 
-//PC向けのEnterキー判定
-inputAnswer.addEventListener("keydown", (event)=> {
-  if(event.isComposing){
-    return;
-  }
-
-  if(event.key === "Enter"){
-    answerAreaDisplay();
-  }
-});
-
-//スマホ向け変換確定判定
-inputAnswer.addEventListener("compositionend", (event)=> {
+answerForm.addEventListener("submit", (event)=> {
+  event.preventDefault();
   answerAreaDisplay();
 });
+
+//PC向けのEnterキー判定
+// inputAnswer.addEventListener("keydown", (event)=> {
+//   if(event.isComposing){
+//     return;
+//   }
+
+//   if(event.key === "Enter"){
+//     answerAreaDisplay();
+//   }
+// });
+
+//スマホ向け変換確定判定
+// inputAnswer.addEventListener("compositionend", (event)=> {
+//   answerAreaDisplay();
+// });
 
 //答えbtnクリック
 judgementAnswerBtn.addEventListener("click", ()=> {
