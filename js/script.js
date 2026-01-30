@@ -273,11 +273,12 @@ inputAnswer.addEventListener("keydown", (event)=> {
   if(event.key === "Enter"){
     answerAreaDisplay();
   }
-})
+});
 
+//スマホ向け変換確定判定
 inputAnswer.addEventListener("compositionend", (event)=> {
   answerAreaDisplay();
-})
+});
 
 //答えbtnクリック
 judgementAnswerBtn.addEventListener("click", ()=> {
