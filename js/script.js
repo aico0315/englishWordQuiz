@@ -3,7 +3,7 @@
 import { wordRecords } from './data.js';
 
 const questionArea = document.querySelector(".question-area");
-const counterArea = document.querySelector(".counter-area");
+const counterArea = document.querySelectorAll(".counter-area");
 const setQuestion = document.querySelector(".set-question");
 const answerForm = document.getElementById("answer-form");
 const inputAnswer = document.querySelector(".input-answer");
@@ -70,6 +70,15 @@ function allViewHidden (){
   clearArea.classList.add("hidden");
 }
 
+//カウンター表示
+function counterNumberDisplay (num){
+  const questionIndex = num !== undefined? num : currentIndex;
+  counterNumber = `${questionIndex +1} / ${shuffledQuestions.length}`;
+  counterArea.forEach(area =>{
+    area.textContent = counterNumber;
+  });
+}
+
 //次の問題が存在するか否か
 const hasNextQuestion = ()=> {
   return currentIndex +1 < shuffledQuestions.length;
@@ -128,8 +137,9 @@ function newSetQuestion (savedQuestionIndex){
     return;  //強制終了
   }
 
-  counterNumber = `${questionIndex +1} / ${shuffledQuestions.length}`;  //この +1 は、データとしてのindex(0開始)と、人間が見るための表示(1開始)を合わすためにindexに1を足している
-  counterArea.textContent = counterNumber;
+  counterNumberDisplay(currentIndex);
+  // counterNumber = `${questionIndex +1} / ${shuffledQuestions.length}`;  //この +1 は、データとしてのindex(0開始)と、人間が見るための表示(1開始)を合わすためにindexに1を足している
+  // counterArea.textContent = counterNumber;
 
   inputAnswer.value = '';
 
