@@ -159,6 +159,8 @@ main {
   font-size: 1.5rem;
   color: rgba(0, 0, 0, 0.8);
   text-align: center;
+  white-space: pre-wrap;
+  line-height: 1.6;
 }
 
 .user-answer-title {
