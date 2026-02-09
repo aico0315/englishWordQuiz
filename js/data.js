@@ -71,7 +71,7 @@ export const wordRecords = [
   {
     question: `delimiter`,
     supplement:`読み:ﾃﾞﾐﾘﾀ
-    形式やルール、書き方など`,
+    区切り文字や区切り記号など`,
     answer: ["区切り文字", "区切り記号", "区切りもじ", "くぎり文字", "区切り記号", "区切りきごう", "くぎり記号"],
   },
   {

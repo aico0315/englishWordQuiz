@@ -14,23 +14,52 @@
     <h1 class="web_title">STUDY</h1>
   </header>
   <main>
-    <div id="question-view" class="question-area">
+    <div id="menu-view" class="menu-area">
+      <div class="menu-list">
+        <button class="question-continue-btn menu-item">つづきから</button>
+        <button class="question-newStart-btn menu-item">はじめから</button>
+        <button class="add-newQuestion-btn menu-item">単語を追加</button>
+      </div>
+    </div>
+    <div id="add-question-view" class="add-question-area">
+      <div class="add-english-area">
+        <p class="word-english">覚えたい英単語を入力してね</p>
+        <input class="input-english-word" type="text" name="input-add-question">
+      </div>
+      <div class="add-japanese-area">
+        <p class="word-japanese">英単語の日本語を入力してね</p>
+        <input class="input-japanese-word" type="text" name="input-add-question">
+      </div>
+      <div class="add-supplement-area">
+        <p class="supplementary-information">補足情報を入力してね（読み方など）</p>
+        <textarea class="input-supplementary-information" type="text" name="input-add-supplementary"></textarea>
+      </div>
+      <button class="add-btn">追加する</button>
+      <button class="return-menu-btn">メニューへ戻る</button>
+    </div>
+    <div id="question-view" class="question-area hidden">
       <div class="counter-area"></div>
       <p class="set-question"></p>
       <form id="answer-form">
         <input class="input-answer" name="user-input" type="text" enterkeyhint="done">
         <button class="judgement-answer-btn">答え</button>
       </form>
+      <button class="return-menu-btn">メニューへ戻る</button>
     </div>
     <div id="answer-view" class="answer-area hidden">
       <div class="counter-area"></div>
       <p class="result-message"></p>
       <p class="correct-answer-title">こたえ</p>
-      <p class="correct-answer"></p>
-      <p class="supplement-message"></p>
-      <p class="user-answer-title">あなたのこたえ</p>
-      <p class="user-answer"></p>
+      <div class="correct-answer-area">
+        <p class="correct-answer"></p>
+        <p class="supplement-message"></p>
+      </div>
+      <div class="user-answer-area">
+        <p class="user-answer-title">あなたのこたえ</p>
+        <p class="user-answer"></p>
+      </div>
       <button class="next-question-btn">次の問題</button>
+      <button class="return-menu-btn">メニューへ戻る</button>
     </div>
     <div id="clear-view" class="clear-area hidden">
       <p class="clear-message">全問回答</p>
