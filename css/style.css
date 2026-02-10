@@ -155,14 +155,14 @@ main {
   width: 70%;
   height: 3%;
   font-size: 1.2rem;
-  margin-top: 3%;
+  margin-top: 20px;
 }
 
 .correct-answer-area {
   display: grid;
   place-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 30px;
+  margin-top: 30px;
 }
 
 .correct-answer {
@@ -187,7 +187,7 @@ main {
   border-radius: 4px;
   display: grid;
   place-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
   width: 50%;
   height: 18%;
 }
