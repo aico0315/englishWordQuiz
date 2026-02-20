@@ -2,11 +2,13 @@
 
 import { wordRecords } from './data.js';
 
+// メニューエリア変数
 const menuArea = document.querySelector(".menu-area");
 const questionContinueBtn = document.querySelector(".question-continue-btn");
 const questionNewStartBtn = document.querySelector(".question-newStart-btn");
 const addNewQuestionBtn = document.querySelector(".add-newQuestion-btn");
 
+// 出題・回答エリア
 const questionArea = document.querySelector(".question-area");
 const counterArea = document.querySelectorAll(".counter-area");
 const setQuestion = document.querySelector(".set-question");
@@ -14,6 +16,7 @@ const answerForm = document.getElementById("answer-form");
 const inputAnswer = document.querySelector(".input-answer");
 const judgementAnswerBtn = document.querySelector(".judgement-answer-btn");
 
+// 解答エリア
 const answerArea = document.querySelector(".answer-area");
 const resultMessage = document.querySelector(".result-message");
 const correctAnswer = document.querySelector(".correct-answer");
@@ -21,20 +24,21 @@ const supplementMessage = document.querySelector(".supplement-message");
 const userAnswer = document.querySelector(".user-answer");
 const nextQuestionBtn = document.querySelector(".next-question-btn");
 
+// 単語追加エリア
 const addQuestionArea = document.querySelector(".add-question-area");
 const inputEnglishWord = document.querySelector(".input-english-word");
 const inputJapaneseWord = document.querySelector(".input-japanese-word");
 const inputSupplementaryInformation = document.querySelector(".input-supplementary-information");
 const addBtn = document.querySelector(".add-btn");
 
+// 単語削除エリア
+const deleteAreaWordList = document.getElementById("deleteArea-wordList");
+
+// 全問回答エリア
 const clearArea = document.querySelector(".clear-area");
 const retryBtn = document.querySelector(".retry-btn");
 
-
-const questionView = document.getElementById("question-view");
-const answerView = document.getElementById("answer-view");
-const clearView = document.getElementById("clear-view");
-const addQuestionView = document.getElementById("add-question-view");
+// ホームボタン（メニューへ戻る）
 const returnMenuBtn = document.querySelectorAll(".return-menu-btn");
 
 
@@ -88,6 +92,9 @@ function displayOnlyAddQuestionArea (){
   answerArea.classList.add("hidden");
   clearArea.classList.add("hidden");
   menuArea.classList.add("hidden");
+  
+  userAddedRecords = getLocalStorageData();
+  wordDelete();
 }
 
 //全問回答(クリア)画面表示
@@ -184,6 +191,29 @@ function getLocalStorageData (){
   return savedUserWords ? JSON.parse(savedUserWords) : [];
 }
 
+//登録単語の削除
+function wordDelete (){
+  deleteAreaWordList.innerHTML = "";
+
+  for(let i = 0; i < userAddedRecords.length; i++){
+    const deleteItem = `<p class="word-item">${[i +1]}.${userAddedRecords[i].question}：${userAddedRecords[i].answer[0]}：<button class="delete-btn" data-index=${i}>削除</button></p>`;
+    deleteAreaWordList.innerHTML += deleteItem;
+  }
+
+  const deleteBtn = document.querySelectorAll(".delete-btn");
+
+  //単語の削除ボタン実行
+  deleteBtn.forEach((btn)=> {
+    btn.addEventListener("click", ()=> {
+      const clickedIndex = btn.dataset.index;
+      const deletedWordsList = userAddedRecords.filter((word, i)=> i !== Number(clickedIndex));
+      userAddedRecords = deletedWordsList;
+      localStorage.setItem("userWords", JSON.stringify(userAddedRecords));
+      wordDelete();
+    });
+  });
+}
+
 
 //問題出題関数
 function newSetQuestion (savedQuestionIndex){
@@ -198,8 +228,6 @@ function newSetQuestion (savedQuestionIndex){
   }
 
   counterNumberDisplay(currentIndex);
-  // counterNumber = `${questionIndex +1} / ${shuffledQuestions.length}`;  //この +1 は、データとしてのindex(0開始)と、人間が見るための表示(1開始)を合わすためにindexに1を足している
-  // counterArea.textContent = counterNumber;
 
   inputAnswer.value = '';
 
@@ -313,10 +341,15 @@ addNewQuestionBtn.addEventListener("click", ()=> {
   displayOnlyAddQuestionArea();
 });
 
+// == wordsAddAndDelete-area ==
+
 //単語追加処理を実行
 addBtn.addEventListener("click", ()=> {
   addQuestionData();
-})
+  userAddedRecords = getLocalStorageData();
+  wordDelete();
+});
+
 
 // == question-area ==
 
