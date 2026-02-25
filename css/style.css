@@ -200,10 +200,6 @@ main {
   color: rgba(50, 48, 48, 0.799);
   font-size: 2rem;
   text-align: center;
-  /* width: 80%;
-  height: 10%; */
-  /* display: grid;
-  place-items: center; */
 }
 
 .next-question-btn {
@@ -217,7 +213,7 @@ main {
 ===================*/
 .add-question-area {
   display: grid;
-  grid-template-rows: 100px 100px 150px;
+  grid-template-rows: 80px 80px 100px;
   gap: 20px;
   place-items: center;
   width: 100%;
@@ -275,7 +271,7 @@ main {
 
 .delete-question-area-title {
   font-size: 2rem;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 #deleteArea-wordList {
@@ -285,6 +281,8 @@ main {
 
 .word-item {
   margin-top: 15px;
+  font-size: 1.4rem;
+  color: dimgray;
 }
 
 /*==================

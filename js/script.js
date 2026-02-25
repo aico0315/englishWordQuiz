@@ -60,6 +60,9 @@ let judgeResult = null;
 //カウンターナンバー
 let counterNumber = "";
 
+//編集中の単語
+let underEditIndex = [];
+
 
 //問題エリアのみ表示
 function displayOnlyQuestionArea (){
@@ -110,6 +113,13 @@ function allViewHidden (){
   answerArea.classList.add("hidden");
   clearArea.classList.add("hidden");
   addQuestionArea.classList.add("hidden");
+}
+
+//
+function wordInputAreaAllClear (){
+  inputEnglishWord.value = "";
+  inputJapaneseWord.value = "";
+  inputSupplementaryInformation.value = "";
 }
 
 //カウンター表示
@@ -165,14 +175,17 @@ function saveData (){
   localStorage.setItem('quizState', JSON.stringify(state));
 }
 
-//問題追加処理
+
+//単語追加処理
 function addQuestionData (){
   const userInputEnglish = inputEnglishWord ? inputEnglishWord.value : "";
   const userInputJapanese = inputJapaneseWord ? inputJapaneseWord.value : "";
+  const userInputSupplement = inputSupplementaryInformation ? inputSupplementaryInformation.value : "";
 
   const addQuestion = {
     question: userInputEnglish,
     answer: [userInputJapanese],
+    supplement: userInputSupplement,
   }
 
   const currentList = getLocalStorageData();
@@ -180,9 +193,32 @@ function addQuestionData (){
 
   localStorage.setItem('userWords', JSON.stringify(currentList));
 
-  inputEnglishWord.value = "";
-  inputJapaneseWord.value = "";
+  wordInputAreaAllClear();
+
   alert("追加しました！メニューから「はじめから」を押すと反映されます。");
+}
+
+//編集後の単語登録
+function wordRevised (){
+  const userInputEnglish = inputEnglishWord ? inputEnglishWord.value : "";
+  const userInputJapanese = inputJapaneseWord ? inputJapaneseWord.value : "";
+  const userInputSupplement = inputSupplementaryInformation ? inputSupplementaryInformation.value : "";
+
+  const currentList = getLocalStorageData();
+  const updateWord = currentList.map((word, i)=> {
+    if(i === underEditIndex){
+      return {
+        question: userInputEnglish,
+        answer: [userInputJapanese],
+        supplement: userInputSupplement,
+      }
+    }else{
+      return word;
+    }
+  });
+
+  localStorage.setItem('userWords', JSON.stringify(updateWord));
+  underEditIndex = null;
 }
 
 //登録された単語データを取得
@@ -196,17 +232,34 @@ function wordDelete (){
   deleteAreaWordList.innerHTML = "";
 
   for(let i = 0; i < userAddedRecords.length; i++){
-    const deleteItem = `<p class="word-item">${[i +1]}.${userAddedRecords[i].question}：${userAddedRecords[i].answer[0]}：<button class="delete-btn" data-index=${i}>削除</button></p>`;
+    const deleteItem = `<p class="word-item">${[i +1]}.${userAddedRecords[i].question}：${userAddedRecords[i].answer[0]}：<button class="edit-btn" data-index=${i}>編集</button>：<button class="delete-btn" data-index=${i}>削除</button></p>`;
     deleteAreaWordList.innerHTML += deleteItem;
   }
 
+  const editBtn = document.querySelectorAll(".edit-btn");
   const deleteBtn = document.querySelectorAll(".delete-btn");
+
+  //単語編集ボタン実行
+  editBtn.forEach((btn)=> {
+    btn.addEventListener("click", ()=>{
+      const clickedIndex = Number(btn.dataset.index);
+      underEditIndex = clickedIndex;
+      inputEnglishWord.value = userAddedRecords[clickedIndex].question ? userAddedRecords[clickedIndex].question : "";
+      inputJapaneseWord.value = userAddedRecords[clickedIndex].answer ? userAddedRecords[clickedIndex].answer : "";
+      inputSupplementaryInformation.value = userAddedRecords[clickedIndex].supplement ? userAddedRecords[clickedIndex].supplement : "";
+
+      const buttonLabel = underEditIndex === null ? "登録" : "更新";
+      addBtn.textContent = buttonLabel;
+    })
+  })
 
   //単語の削除ボタン実行
   deleteBtn.forEach((btn)=> {
     btn.addEventListener("click", ()=> {
       const clickedIndex = btn.dataset.index;
       const deletedWordsList = userAddedRecords.filter((word, i)=> i !== Number(clickedIndex));
+      alert("削除しました");
+
       userAddedRecords = deletedWordsList;
       localStorage.setItem("userWords", JSON.stringify(userAddedRecords));
       wordDelete();
@@ -345,9 +398,17 @@ addNewQuestionBtn.addEventListener("click", ()=> {
 
 //単語追加処理を実行
 addBtn.addEventListener("click", ()=> {
-  addQuestionData();
-  userAddedRecords = getLocalStorageData();
-  wordDelete();
+  if(underEditIndex === null){
+    addQuestionData();
+    userAddedRecords = getLocalStorageData();
+    wordDelete();
+  }else {
+    wordRevised();
+    wordInputAreaAllClear();
+    alert("更新されました");
+    addBtn.textContent = "登録";
+    wordDelete();
+  }
 });
 
 
