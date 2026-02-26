@@ -189,9 +189,12 @@ function saveData (){
 function addQuestionData (){
   const userInput = isInputData();
 
+  const userInputJapanese = userInput.japanese;
+  const answerArray = userInputJapanese.split("、");
+
   const addQuestion = {
     question: userInput.english,
-    answer: [userInput.japanese],
+    answer: [answerArray],
     supplement: userInput.supplement,
   }
 
@@ -209,12 +212,15 @@ function addQuestionData (){
 function wordRevised (){
   const userInput = isInputData();
 
+  const userInputJapanese = userInput.japanese;
+  const answerArray = userInputJapanese.split("、");
+
   const currentList = getLocalStorageData();
   const updateWord = currentList.map((word, i)=> {
     if(i === underEditIndex){
       return {
         question: userInput.english,
-        answer: [userInput.japanese],
+        answer: [answerArray],
         supplement: userInput.supplement,
       }
     }else{
