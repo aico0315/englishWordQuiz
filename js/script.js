@@ -1,6 +1,6 @@
 "use strict";
 
-import { wordRecords } from './data.js';
+// import { wordRecords } from './data.js';
 
 // メニューエリア変数
 const menuArea = document.querySelector(".menu-area");
@@ -95,7 +95,6 @@ function displayOnlyAddQuestionArea (){
   answerArea.classList.add("hidden");
   clearArea.classList.add("hidden");
   menuArea.classList.add("hidden");
-  
   userAddedRecords = getLocalStorageData();
   wordDelete();
 }
@@ -115,7 +114,7 @@ function allViewHidden (){
   addQuestionArea.classList.add("hidden");
 }
 
-//
+//入力エリアをクリア
 function wordInputAreaAllClear (){
   inputEnglishWord.value = "";
   inputJapaneseWord.value = "";
@@ -381,7 +380,7 @@ questionNewStartBtn.addEventListener("click", ()=> {
   currentIndex = 0;
   const userWords = getLocalStorageData();
   userAddedRecords = userWords;
-  shuffledQuestions = [...wordRecords, ...userWords];
+  shuffledQuestions = userWords;
 
   shuffleQuestions();
   newSetQuestion();
