@@ -61,7 +61,7 @@ let judgeResult = null;
 let counterNumber = "";
 
 //編集中の単語
-let underEditIndex = [];
+let underEditIndex = null;
 
 
 //問題エリアのみ表示
@@ -135,6 +135,16 @@ const hasNextQuestion = ()=> {
   return currentIndex +1 < shuffledQuestions.length;
 }
 
+//入力データの有無
+function isInputData (){
+  const userInput = {
+    english: inputEnglishWord ? inputEnglishWord.value : "",
+    japanese: inputJapaneseWord ? inputJapaneseWord.value : "",
+    supplement: inputSupplementaryInformation ? inputSupplementaryInformation.value : "",
+  }
+  return userInput;
+}
+
 
 //問題をシャッフルする
 function shuffleQuestions (){
@@ -177,14 +187,12 @@ function saveData (){
 
 //単語追加処理
 function addQuestionData (){
-  const userInputEnglish = inputEnglishWord ? inputEnglishWord.value : "";
-  const userInputJapanese = inputJapaneseWord ? inputJapaneseWord.value : "";
-  const userInputSupplement = inputSupplementaryInformation ? inputSupplementaryInformation.value : "";
+  const userInput = isInputData();
 
   const addQuestion = {
-    question: userInputEnglish,
-    answer: [userInputJapanese],
-    supplement: userInputSupplement,
+    question: userInput.english,
+    answer: [userInput.japanese],
+    supplement: userInput.supplement,
   }
 
   const currentList = getLocalStorageData();
@@ -199,17 +207,15 @@ function addQuestionData (){
 
 //編集後の単語登録
 function wordRevised (){
-  const userInputEnglish = inputEnglishWord ? inputEnglishWord.value : "";
-  const userInputJapanese = inputJapaneseWord ? inputJapaneseWord.value : "";
-  const userInputSupplement = inputSupplementaryInformation ? inputSupplementaryInformation.value : "";
+  const userInput = isInputData();
 
   const currentList = getLocalStorageData();
   const updateWord = currentList.map((word, i)=> {
     if(i === underEditIndex){
       return {
-        question: userInputEnglish,
-        answer: [userInputJapanese],
-        supplement: userInputSupplement,
+        question: userInput.english,
+        answer: [userInput.japanese],
+        supplement: userInput.supplement,
       }
     }else{
       return word;
@@ -218,6 +224,7 @@ function wordRevised (){
 
   localStorage.setItem('userWords', JSON.stringify(updateWord));
   underEditIndex = null;
+  userAddedRecords = updateWord;
 }
 
 //登録された単語データを取得
@@ -403,9 +410,11 @@ addBtn.addEventListener("click", ()=> {
     wordDelete();
   }else {
     wordRevised();
+    underEditIndex = null;
     wordInputAreaAllClear();
     alert("更新されました");
     addBtn.textContent = "登録";
+    userAddedRecords = getLocalStorageData();
     wordDelete();
   }
 });
