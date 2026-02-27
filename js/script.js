@@ -139,7 +139,7 @@ const hasNextQuestion = ()=> {
 function isInputData (){
   const userInput = {
     english: inputEnglishWord ? inputEnglishWord.value : "",
-    japanese: inputJapaneseWord ? inputJapaneseWord.value : "",
+    japanese: inputJapaneseWord ? inputJapaneseWord.value.split(/[、,]/) : "",
     supplement: inputSupplementaryInformation ? inputSupplementaryInformation.value : "",
   }
   return userInput;
@@ -194,7 +194,7 @@ function addQuestionData (){
 
   const addQuestion = {
     question: userInput.english,
-    answer: [answerArray],
+    answer: answerArray,
     supplement: userInput.supplement,
   }
 
@@ -213,14 +213,14 @@ function wordRevised (){
   const userInput = isInputData();
 
   const userInputJapanese = userInput.japanese;
-  const answerArray = userInputJapanese.split("、");
+  const answerArray = userInputJapanese;
 
   const currentList = getLocalStorageData();
   const updateWord = currentList.map((word, i)=> {
     if(i === underEditIndex){
       return {
         question: userInput.english,
-        answer: [answerArray],
+        answer: answerArray,
         supplement: userInput.supplement,
       }
     }else{
