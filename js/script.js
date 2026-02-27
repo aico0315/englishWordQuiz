@@ -2,6 +2,9 @@
 
 // import { wordRecords } from './data.js';
 
+const body = document.querySelector("body");
+const darkModeToggleBtn = document.getElementById("dark-mode-toggle");
+
 // メニューエリア変数
 const menuArea = document.querySelector(".menu-area");
 const questionContinueBtn = document.querySelector(".question-continue-btn");
@@ -130,6 +133,11 @@ function counterNumberDisplay (num){
   });
 }
 
+//ダークモードか否か
+function isDarkMode (){
+  return body.classList.contains(".dark-mode");
+}
+
 //次の問題が存在するか否か
 const hasNextQuestion = ()=> {
   return currentIndex +1 < shuffledQuestions.length;
@@ -255,7 +263,7 @@ function wordDelete (){
   editBtn.forEach((btn)=> {
     btn.addEventListener("click", ()=>{
       addQuestionArea.scrollIntoView({behavior: "smooth"});
-      
+
       const clickedIndex = Number(btn.dataset.index);
       underEditIndex = clickedIndex;
       inputEnglishWord.value = userAddedRecords[clickedIndex].question ? userAddedRecords[clickedIndex].question : "";
@@ -383,12 +391,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
   menuViewDisplay();
 });
 
-// == menu-area ==
-
-//保存データからのスタート
-questionContinueBtn.addEventListener("click", ()=> {
-  loadQuiz();
+// == dark-mode ==
+darkModeToggleBtn.addEventListener("click", ()=>{
+  body.classList.toggle("dark-mode");
 });
+
+// == menu-area ==
 
 //はじめからスタート
 questionNewStartBtn.addEventListener("click", ()=> {
@@ -400,6 +408,11 @@ questionNewStartBtn.addEventListener("click", ()=> {
   shuffleQuestions();
   newSetQuestion();
   saveData();
+});
+
+//保存データからのスタート
+questionContinueBtn.addEventListener("click", ()=> {
+  loadQuiz();
 });
 
 //単語追加ページへの遷移

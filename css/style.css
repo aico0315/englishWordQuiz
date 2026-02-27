@@ -20,6 +20,38 @@ body {
   flex-direction: column;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#dark-mode-toggle {
+  font-size: 1.6rem;
+  padding: 20px;
+}
+
+/* デフォルト（昼） */
+body {
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s, color 0.3s; /* じわ〜っと色を変える魔法 */
+}
+
+/* ダークモード（夜） */
+body.dark-mode,
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode .set-question,
+body.dark-mode .user-answer,
+body.dark-mode .supplement-message,
+body.dark-mode .add-english-area,
+body.dark-mode .add-japanese-area,
+body.dark-mode .add-supplement-area,
+body.dark-mode .word-item {
+  background-color: #1a1a1a; /* 濃いグレー */
+  color: #f0f0f0;            /* 柔らかい白 */
+}
+
 .counter-area {
   text-align: center;
   margin-top: 30px;
@@ -28,7 +60,7 @@ body {
 
 .return-menu-btn {
   font-size: 1.2rem;
-  margin-top: 30px;
+  padding: 20px 0;
   color: lightcoral;
   z-index: 100;
 }
@@ -245,7 +277,7 @@ main {
   height: 100%;
   font-size: 2rem;
   margin-top: 10px;
-  padding-left: 10px;
+  padding: 10px;
   /* text-align: center; */
 }
 
@@ -282,7 +314,7 @@ main {
 
 .word-item {
   margin-top: 15px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: dimgray;
 }
 
