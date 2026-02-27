@@ -190,7 +190,7 @@ function addQuestionData (){
   const userInput = isInputData();
 
   const userInputJapanese = userInput.japanese;
-  const answerArray = userInputJapanese.split("、");
+  const answerArray = userInputJapanese;
 
   const addQuestion = {
     question: userInput.english,
