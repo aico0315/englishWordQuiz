@@ -254,6 +254,8 @@ function wordDelete (){
   //単語編集ボタン実行
   editBtn.forEach((btn)=> {
     btn.addEventListener("click", ()=>{
+      addQuestionArea.scrollIntoView({behavior: "smooth"});
+      
       const clickedIndex = Number(btn.dataset.index);
       underEditIndex = clickedIndex;
       inputEnglishWord.value = userAddedRecords[clickedIndex].question ? userAddedRecords[clickedIndex].question : "";
