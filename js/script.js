@@ -135,7 +135,7 @@ function counterNumberDisplay (num){
 
 //ダークモードか否か
 function isDarkMode (){
-  return body.classList.contains(".dark-mode");
+  return body.classList.contains("dark-mode");
 }
 
 //次の問題が存在するか否か
@@ -387,6 +387,11 @@ shuffleQuestions();
 
 //ロード後
 document.addEventListener("DOMContentLoaded", ()=>{
+  const modeResult = localStorage.getItem("isDarkMode");
+  const displayMode = JSON.parse(modeResult);
+  if(displayMode){
+    body.classList.add("dark-mode");
+  }
   allViewHidden();
   menuViewDisplay();
 });
@@ -394,6 +399,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 // == dark-mode ==
 darkModeToggleBtn.addEventListener("click", ()=>{
   body.classList.toggle("dark-mode");
+  localStorage.setItem("isDarkMode", JSON.stringify(isDarkMode()));
 });
 
 // == menu-area ==
