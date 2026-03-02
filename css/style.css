@@ -1,8 +1,13 @@
 @charset "utf-8";
 
 :root {
-  --textAreaBackgroundColor: aliceblue;
-  --btnBackgroundColor: cornflowerblue;
+  --baseColor: rgb(255, 255, 255);
+  --mainColor: cornflowerblue;
+  --accentColorRed: #ef2323;
+  --accentColorGreen: #069c0b;
+  --questionColor: rgb(2, 31, 74);
+  --sectionBaseColor: rgb(255, 255, 255);
+  --itemShadow: 0.5px 0.5px 0.8px 2px #5b5b5b88;
 }
 
 /*===================
@@ -32,8 +37,8 @@ header {
 
 /* デフォルト（昼） */
 body {
-  background-color: white;
-  color: black;
+  background-color: var(--baseColor);
+  color: var(--questionColor);
   transition: background-color 0.3s, color 0.3s; /* じわ〜っと色を変える魔法 */
 }
 
@@ -118,23 +123,28 @@ main {
   height: 100%;
   display: grid;
   place-items: center;
+  grid-template-rows: 10% 40% 40% 10%;
 }
 
 .set-question {
   display: grid;
   place-items: center;
-  color: rgb(22, 20, 20);
+  font-family: 'メイリオ', 'ヒラギノ角ゴシック', Arial;
+  font-weight: 700;
+  color: var(--questionColor);
   font-size: 3.6rem;
   white-space: pre-wrap;
-  /* background-color: cornflowerblue; */
-  width: 100%;
-  height: 30%;
+  background-color: var(--sectionBaseColor);
+  width: 90%;
+  height: 95%;
+  box-shadow: var(--itemShadow);
+  border-radius: 6px;
 }
 
 #answer-form {
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-items: center;
 }
 
 .input-answer {
@@ -142,9 +152,10 @@ main {
   margin: 0 auto;
   text-align: center;
   color: rgb(22, 20, 20);
-  width: 80%;
-  height: 75%;
+  width: 90%;
+  height: 90%;
   border: 1px solid rgba(128, 128, 128, 0.201);
+  box-shadow: var(--itemShadow);
   border-radius: 4px;
 }
 
@@ -152,7 +163,7 @@ main {
   font-size: 3.6rem;
   margin: 0 auto;
   padding: 10px;
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 
 .text-black {
