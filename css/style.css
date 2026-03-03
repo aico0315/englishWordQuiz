@@ -1,14 +1,27 @@
 @charset "utf-8";
 
 :root {
-  --baseColor: rgb(255, 255, 255);
-  --mainColor: cornflowerblue;
-  --accentColorRed: #ef2323;
-  --accentColorGreen: #069c0b;
-  --questionColor: rgb(2, 31, 74);
-  --sectionBaseColor: rgb(250, 250, 250);
-  --itemShadow: 0.5px 0.5px 0.8px 1px #5b5b5b88;
+  /* color変数 */
+  --baseColor: rgb(250, 250, 244);
+  --sectionBaseColor: rgb(255, 255, 248);
+  --mainColor: rgba(113, 76, 76, 0.488);
+  --accentColorRed: #ef2323b0;
+  --accentColorGreen: #069c0bb0;
+  --questionColor: rgba(2, 31, 74, 0.931);
   --btnTextColor: rgb(251, 251, 251);
+  --itemShadow: 0.5px 0.5px 0.8px 1.2px #494953d3;
+
+  /* 余白変数 */
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+
+  /* 角丸 */
+  --radius: 8px;
+
+  /* font-family */
+  --english: 'メイリオ', 'ヒラギノ角ゴシック', Arial;
+  --japanese: "Noto Sans JP";
 }
 
 /*===================
@@ -33,7 +46,7 @@ header {
 
 #dark-mode-toggle {
   font-size: 1.6rem;
-  padding: 20px;
+  padding: var(--space-s);
 }
 
 /* デフォルト（昼） */
@@ -60,12 +73,13 @@ body.dark-mode .word-item {
 
 .counter-area {
   text-align: center;
-  margin-top: 30px;
+  margin-top: var(--space-m);
   font-size: 1.6rem;
 }
 
 .return-menu-btn {
   font-size: 1.2rem;
+  font-family: var(--japanese);
   padding: 10px 0;
   color: lightcoral;
   z-index: 100;
@@ -84,8 +98,8 @@ header h1{
   color: cornflowerblue;
   font-family:'Times New Roman', Times, serif;
   font-weight: 700;
-  font-size: 4rem;
-  padding: 4px 10px;
+  font-size: 3rem;
+  padding: 10px;
   height: 7%;
 }
 /* header */
@@ -98,6 +112,7 @@ main {
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 0 var(--space-m);
 }
 
 /*===================
@@ -113,6 +128,7 @@ main {
 .menu-item {
   margin-top: 70px;
   font-size: 3rem;
+  font-family: var(--japanese);
 }
 
 /*===================
@@ -124,7 +140,8 @@ main {
   height: 100%;
   display: grid;
   place-items: center;
-  grid-template-rows: 10% 40% 40% 10%;
+  grid-template-rows: 10% 40% 30% 10%;
+  gap: var(--space-m);
 }
 
 .set-question {
@@ -136,43 +153,48 @@ main {
   font-size: 3.6rem;
   white-space: pre-wrap;
   background-color: var(--sectionBaseColor);
-  width: 90%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
   box-shadow: var(--itemShadow);
-  border-radius: 6px;
+  border-radius: var(--radius);
 }
 
 #answer-form {
   height: 100%;
   display: grid;
   place-items: center;
+  grid-template-rows: 70% 30%;
+  gap: var(--space-m);
 }
 
 .input-answer {
   font-size: 3.6rem;
+  font-family: var(--japanese);
   margin: 0 auto;
   text-align: center;
   color: rgb(22, 20, 20);
-  width: 90%;
-  height: 90%;
-  border: 1px solid rgba(128, 128, 128, 0.201);
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid rgba(128, 128, 128, 0.201); */
   background-color: var(--sectionBaseColor);
   box-shadow: var(--itemShadow);
-  border-radius: 4px;
+  border-radius: var(--radius);
 }
 
 .judgement-answer-btn,
-.next-question-btn {
-  font-size: 2.5rem;
+.next-question-btn,
+.retry-btn {
+  font-size: 2.4rem;
+  font-family: var(--japanese);
   margin: 0 auto;
-  padding: 10px;
+  padding: var(--space-s);
   color: var(--btnTextColor);
   background-color: var(--mainColor);
   text-align: center;
   width: 160px;
   height: 44px;
-  border-radius: 6px;
   box-shadow: var(--itemShadow);
+  border-radius: var(--radius);
 }
 
 .text-black {
@@ -188,17 +210,19 @@ main {
   height: 100%;
   display: grid;
   place-items: center;
-  grid-template-rows: 10% 10% 30% 20% 20% 10%;
+  grid-template-rows: 10% 10% 30% 20% 15% 5%;
+  gap: var(--space-s);
   /* align-items: center; */
-  position: absolute;
+  /* position: absolute; */
 }
 
 .result-message {
   display: grid;
   place-items: center;
   font-size: 2rem;
+  font-family: var(--japanese);
   white-space: pre-wrap;
-  width: 90%;
+  width: 100%;
   padding: 10px;
   border-radius: 6px;
 }
@@ -207,6 +231,7 @@ main {
   width: 95%;
   /* height: 3%; */
   font-size: 1.2rem;
+  font-family: var(--japanese);
   /* margin-top: 20px; */
 }
 
@@ -214,7 +239,7 @@ main {
   display: grid;
   place-items: center;
   gap: 5px;
-  width: 90%;
+  width: 100%;
   height: 95%;
   border-radius: 6px;
   box-shadow: var(--itemShadow);
@@ -223,6 +248,8 @@ main {
 }
 
 .correct-answer {
+  font-family: var(--japanese);
+  font-weight: 700;
   font-size: 3.6rem;
   text-align: center;
   width: 100%;
@@ -234,6 +261,7 @@ main {
   width: 100%;
   height: 100%;
   font-size: 1.5rem;
+  font-family: var(--japanese);
   color: rgba(37, 37, 37, 0.8);
   text-align: center;
   white-space: pre-wrap;
@@ -246,14 +274,16 @@ main {
   border-radius: 6px;
   box-shadow: var(--itemShadow);
   display: grid;
+  grid-template-rows: 30% 70%;
   /* place-items: center; */
-  margin-top: 10px;
-  width: 90%;
+  /* margin-top: 10px; */
+  width: 100%;
   height: 100%;
 }
 
 .user-answer-title {
   font-size: 1.2rem;
+  font-family: var(--japanese);
   align-items: center;
   padding: 10px;
 }
@@ -261,7 +291,9 @@ main {
 .user-answer {
   color: rgba(50, 48, 48, 0.799);
   font-size: 2rem;
+  font-family: var(--japanese);
   text-align: center;
+  padding: var(--space-m);
 }
 
 /* .next-question-btn {
@@ -311,12 +343,21 @@ main {
   /* text-align: center; */
 }
 
+.input-english-word {
+  font-family: var(--english);
+}
+
+.input-japanese-word {
+  font-family: var(--japanese);
+}
+
 .input-supplementary-information {
   border: 1px solid rgba(128, 128, 128, 0.201);
   border-radius: 4px;
   width: 100%;
   height: 60%;
   font-size: 1.8rem;
+  font-family: var(--japanese);
   /* text-align: center; */
   margin-top: 10px;
   padding: 10px;
@@ -324,6 +365,7 @@ main {
 
 .add-btn {
   font-size: 3.6rem;
+  font-family: var(--japanese);
   padding: 10px;
   /* margin-top: 10px; */
 }
@@ -334,6 +376,7 @@ main {
 
 .delete-question-area-title {
   font-size: 2rem;
+  font-family: var(--japanese);
   margin-top: 50px;
 }
 
@@ -345,6 +388,7 @@ main {
 .word-item {
   margin-top: 15px;
   font-size: 1.6rem;
+  font-family: var(--japanese);
   color: dimgray;
 }
 
@@ -359,43 +403,45 @@ main {
   margin-top: 70px;
   width: 65%;
   height: 50%;
-  background-color: rgba(237, 100, 182, 0.3);
+  background-color: rgba(239, 226, 234, 0.3);
+  box-shadow: var(--itemShadow);
   border-radius: 4px;
   z-index: 10;
 }
 
 .clear-message {
   font-size: 2.5rem;
-  font-family:'Zen Maru Gothic';
+  font-family:var(--japanese);
   font-weight: 700;
-  color: rgb(255, 255, 255);
+  color: var(--questionColor);
 }
 
 .clear-text {
   font-size: 1.6rem;
+  font-family: var(--japanese);
 }
 
-.retry-btn {
+/* .retry-btn {
   border: 1px solid;
   border-radius: 4px;
   font-size: 2.5rem;
-  font-family:'Zen Maru Gothic';
+  font-family:var(--japanese);
   font-weight: 700;
   color: rgb(255, 255, 255);
   padding: 5px;
-}
+} */
 
 /*===================
     toggle style
 ===================*/
 .true-style {
-  background-color: rgba(240, 128, 128, 0.5);
+  background-color: var(--accentColorGreen);
   color: rgb(255, 255, 255);
   font-weight: 700;
 }
 
 .false-style {
-  background-color: rgba(70, 131, 180, 0.5);
+  background-color: var(--accentColorRed);
   color: rgb(255, 255, 255);
   font-weight: 700;
 }
