@@ -140,7 +140,7 @@ main {
   height: 100%;
   display: grid;
   place-items: center;
-  grid-template-rows: 10% 40% 30% 10%;
+  grid-template-rows: 10% 30% 40% 10%;
   gap: var(--space-m);
 }
 
@@ -150,7 +150,7 @@ main {
   font-family: 'メイリオ', 'ヒラギノ角ゴシック', Arial;
   font-weight: 700;
   color: var(--questionColor);
-  font-size: 3.6rem;
+  font-size: 4rem;
   white-space: pre-wrap;
   background-color: var(--sectionBaseColor);
   width: 100%;
