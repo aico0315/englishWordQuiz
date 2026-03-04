@@ -2,14 +2,16 @@
 
 :root {
   /* color変数 */
-  --baseColor: rgb(250, 250, 244);
-  --sectionBaseColor: rgb(255, 255, 248);
-  --mainColor: rgba(113, 76, 76, 0.488);
-  --accentColorRed: #ef2323b0;
-  --accentColorGreen: #069c0bb0;
+  --baseColor: rgb(255, 253, 249);
+  --sectionBaseColor: rgb(253, 249, 249);
+  --mainColor: #4a3b34d0;
+  --btnColor: #EFE7DC;
+  --accentColorRed: #d77979b0;
+  --accentColorGreen: #5ea761b0;
   --questionColor: rgba(2, 31, 74, 0.931);
-  --btnTextColor: rgb(251, 251, 251);
+  --btnTextColor: #4a3b34d0;
   --itemShadow: 0.5px 0.5px 0.8px 1.2px #494953d3;
+  --textShadow: 1px 1px 1px #494953d3;
 
   /* 余白変数 */
   --space-s: 8px;
@@ -22,6 +24,16 @@
   /* font-family */
   --english: 'メイリオ', 'ヒラギノ角ゴシック', Arial;
   --japanese: "Noto Sans JP";
+
+  /* ===ダークモード時=== */
+  --darkModeBaseColor: #1a1a1a;
+  --darkModeFontColor: #f0f0f0;
+  /* ボーダー */
+  --borderStyle: 1px solid #545454;
+
+  /* ボタン */
+  --darkModeBtnColor: ;
+  --darkModeItemShadow: 0.5px 0.5px 0.8px 1.2px #dfdfe1d3;
 }
 
 /*===================
@@ -44,44 +56,19 @@ header {
   justify-content: space-between;
 }
 
-#dark-mode-toggle {
-  font-size: 1.6rem;
-  padding: var(--space-s);
-}
-
-/* デフォルト（昼） */
-body {
-  background-color: var(--baseColor);
-  color: var(--questionColor);
-  transition: background-color 0.3s, color 0.3s; /* じわ〜っと色を変える魔法 */
-}
-
-/* ダークモード（夜） */
-body.dark-mode,
-body.dark-mode input,
-body.dark-mode textarea,
-body.dark-mode .set-question,
-body.dark-mode .user-answer,
-body.dark-mode .supplement-message,
-body.dark-mode .add-english-area,
-body.dark-mode .add-japanese-area,
-body.dark-mode .add-supplement-area,
-body.dark-mode .word-item {
-  background-color: #1a1a1a; /* 濃いグレー */
-  color: #f0f0f0;            /* 柔らかい白 */
-}
-
 .counter-area {
   text-align: center;
   margin-top: var(--space-m);
   font-size: 1.6rem;
+  font-family: var(--english);
 }
 
 .return-menu-btn {
   font-size: 1.2rem;
   font-family: var(--japanese);
+  font-weight: 500;
   padding: 10px 0;
-  color: lightcoral;
+  color: var(--btnTextColor);
   z-index: 100;
 }
 
@@ -95,7 +82,8 @@ header {
 }
 
 header h1{
-  color: cornflowerblue;
+  color: var(--mainColor);
+  text-shadow: var(--textShadow);
   font-family:'Times New Roman', Times, serif;
   font-weight: 700;
   font-size: 3rem;
@@ -140,7 +128,7 @@ main {
   height: 100%;
   display: grid;
   place-items: center;
-  grid-template-rows: 10% 30% 40% 10%;
+  grid-template-rows: 10% 30% 30% 10%;
   gap: var(--space-m);
 }
 
@@ -164,7 +152,7 @@ main {
   display: grid;
   place-items: center;
   grid-template-rows: 70% 30%;
-  gap: var(--space-m);
+  gap: var(--space-l);
 }
 
 .input-answer {
@@ -189,7 +177,7 @@ main {
   margin: 0 auto;
   padding: var(--space-s);
   color: var(--btnTextColor);
-  background-color: var(--mainColor);
+  background-color: var(--btnColor);
   text-align: center;
   width: 160px;
   height: 44px;
@@ -210,22 +198,48 @@ main {
   height: 100%;
   display: grid;
   place-items: center;
-  grid-template-rows: 10% 10% 30% 20% 15% 5%;
+  grid-template-rows: 10% 5% 30% 20% 15% 5%;
   gap: var(--space-s);
   /* align-items: center; */
   /* position: absolute; */
 }
 
-.result-message {
+.result-message-area {
   display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
   place-items: center;
+  width: 90%;
+  height: 80px;
+}
+
+.result-message {
+  text-align: center;
+  /* justify-self: left; */
   font-size: 2rem;
   font-family: var(--japanese);
   white-space: pre-wrap;
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
+  /* width: 20%; */
+  /* margin-left: var(--space-s); */
+  padding: 3px;
+  /* border-top: 5px solid var(--accentColorRed);;
+  border-bottom: 5px solid var(--accentColorRed); */
+  /* border-radius: 6px; */
 }
+
+.result-message-icon-left,
+.result-message-icon-right {
+  width: 80px;
+  height: 80px;
+}
+
+.result-message-icon-left svg,
+.result-message-icon-right svg {
+  width: 100%;
+  height: 100%;
+  /* display: block; */
+}
+
+
 
 .correct-answer-title {
   width: 95%;
@@ -435,17 +449,54 @@ main {
     toggle style
 ===================*/
 .true-style {
-  background-color: var(--accentColorGreen);
-  color: rgb(255, 255, 255);
+  /* background-color: var(--accentColorGreen); */
+  color: var(--accentColorGreen);
   font-weight: 700;
 }
 
 .false-style {
-  background-color: var(--accentColorRed);
-  color: rgb(255, 255, 255);
+  /* background-color: var(--accentColorRed); */
+  color: var(--accentColorRed);
   font-weight: 700;
 }
 
 .hidden {
   display: none;
 }
+
+/*===================
+    dark-mode style
+===================*/
+#dark-mode-toggle {
+  font-size: 1.6rem;
+  font-family: var(--english);
+  font-weight: 500;
+  color: var(--btnTextColor);
+  padding: var(--space-s);
+}
+
+/* デフォルト（昼） */
+body {
+  background-color: var(--baseColor);
+  color: var(--questionColor);
+  transition: background-color 0.3s, color 0.3s; /* じわ〜っと色を変える魔法 */
+}
+
+/* ダークモード（夜） */
+body.dark-mode,
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode .set-question,
+body.dark-mode .user-answer,
+body.dark-mode .supplement-message,
+body.dark-mode .add-english-area,
+body.dark-mode .add-japanese-area,
+body.dark-mode .add-supplement-area,
+body.dark-mode .word-item,
+body.dark-mode .correct-answer-area,
+body.dark-mode .user-answer-title {
+  background-color: var(--darkModeBaseColor); /* 濃いグレー */
+  color: var(--darkModeFontColor);            /* 柔らかい白 */
+  border: var(--borderStyle);
+}
+
