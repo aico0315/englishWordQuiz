@@ -58,7 +58,7 @@ header {
 
 .counter-area {
   text-align: center;
-  margin-top: var(--space-m);
+  margin-top: var(--space-s);
   font-size: 1.6rem;
   font-family: var(--english);
 }
@@ -140,7 +140,7 @@ main {
   height: 100%;
   display: grid;
   place-items: center;
-  grid-template-rows: 10% 30% 30% 10%;
+  grid-template-rows: 15% 35% 25% 15%;
   gap: var(--space-m);
 }
 
@@ -210,7 +210,7 @@ main {
   height: 100%;
   display: grid;
   place-items: center;
-  grid-template-rows: 10% 5% 30% 20% 15% 5%;
+  grid-template-rows: 10% 8% 30% 20% 15% 5%;
   gap: var(--space-s);
   /* align-items: center; */
   /* position: absolute; */
@@ -226,16 +226,10 @@ main {
 
 .result-message {
   text-align: center;
-  /* justify-self: left; */
-  font-size: 2rem;
+  font-size: 3rem;
   font-family: var(--japanese);
   white-space: pre-wrap;
-  /* width: 20%; */
-  /* margin-left: var(--space-s); */
-  padding: 3px;
-  /* border-top: 5px solid var(--accentColorRed);;
-  border-bottom: 5px solid var(--accentColorRed); */
-  /* border-radius: 6px; */
+  padding-bottom: 8px;
 }
 
 .result-message-icon-left,
