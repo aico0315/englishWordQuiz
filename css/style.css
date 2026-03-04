@@ -106,17 +106,29 @@ main {
 /*===================
     menu-area
 ====================*/
+.menu-area {
+  width: 100%;
+  height: 90%;
+  display: grid;
+  align-items: center;
+}
+
 .menu-list {
+  background-color: var(--sectionBaseColor);
+  box-shadow: var(--itemShadow);
+  border-radius: var(--radius);
   display: grid;
   place-items: center;
+  grid-template-rows: 35% 30% 35%;
   width: 100%;
-  height: 100%;
+  height: 60%;
 }
 
 .menu-item {
-  margin-top: 70px;
   font-size: 3rem;
   font-family: var(--japanese);
+  color: var(--mainColor);
+  font-weight: 500;
 }
 
 /*===================

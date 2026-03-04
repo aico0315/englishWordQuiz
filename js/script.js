@@ -25888,6 +25888,7 @@ const resultMessageIconRight = document.querySelector(".result-message-icon-righ
 
 const body = document.querySelector("body");
 const darkModeToggleBtn = document.getElementById("dark-mode-toggle");
+const webTitle = document.querySelector(".web-title");
 
 // メニューエリア変数
 const menuArea = document.querySelector(".menu-area");
@@ -26372,9 +26373,13 @@ retryBtn.addEventListener("click", ()=> {
   saveData();
 });
 
+webTitle.addEventListener("click", ()=> {
+  allViewHidden();
+  menuViewDisplay();
+});
+
 returnMenuBtn.forEach((btn) => {
   btn.addEventListener("click", ()=> {
-  console.log("ボタンが押されました");
   allViewHidden();
   menuViewDisplay();
   });
