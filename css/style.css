@@ -27,12 +27,14 @@
 
   /* ===ダークモード時=== */
   --darkModeBaseColor: #1a1a1a;
-  --darkModeFontColor: #f0f0f0;
+  --darkModeFontColor: #f9eed9;
+
   /* ボーダー */
-  --borderStyle: 1px solid #545454;
+  --darkModeBorderStyle: 1px solid #909090;
+  --darkModeItemShadow: 0.5px 0.5px 0.8px 1.2px #fafafbd3;
 
   /* ボタン */
-  --darkModeBtnColor: ;
+  --darkModeBtnColor: #be7c4c97;
   --darkModeItemShadow: 0.5px 0.5px 0.8px 1.2px #dfdfe1d3;
 }
 
@@ -56,10 +58,6 @@ header {
   justify-content: space-between;
 }
 
-/* .is-hidden {
-  display: none !important;
-} */
-
 .counter-area {
   text-align: center;
   margin-top: var(--space-s);
@@ -80,7 +78,6 @@ header {
       header
 =====================*/
 header {
-  /* background-color: rgba(221, 160, 221, 0.243); */
   width: 100vw;
   height: 50px;
 }
@@ -293,16 +290,13 @@ main {
 }
 
 .user-answer-area {
-  /* border: 1px dashed #98989885; */
-  background-color: var(--sectionBaseColor);
-  border-radius: 6px;
-  box-shadow: var(--itemShadow);
   display: grid;
   grid-template-rows: 30% 70%;
-  /* place-items: center; */
-  /* margin-top: 10px; */
   width: 100%;
   height: 100%;
+  background-color: var(--sectionBaseColor);
+  border-radius: var(--radius);
+  box-shadow: var(--itemShadow);
 }
 
 .user-answer-title {
@@ -310,6 +304,7 @@ main {
   font-family: var(--japanese);
   align-items: center;
   padding: 10px;
+  border-radius: 8px 8px 0 0;
 }
 
 .user-answer {
@@ -318,6 +313,7 @@ main {
   font-family: var(--japanese);
   text-align: center;
   padding: var(--space-m);
+  border-radius: 0 0 8px 8px;
 }
 
 /* .next-question-btn {
@@ -341,14 +337,14 @@ main {
 
 .add-english-area,
 .add-japanese-area {
-  width: 80%;
+  width: 100%;
   /* height: 40%; */
   font-size: 1.4rem;
   color: dimgray;
 }
 
 .add-supplement-area {
-  width: 80%;
+  width: 100%;
   height: 100%;
   font-size: 1.4rem;
   color: dimgray;
@@ -395,7 +391,8 @@ main {
 }
 
 .delete-question-area {
-  width: 85%;
+  width: 100%;
+  padding: 0 var(--space-s);
 }
 
 .delete-question-area-title {
@@ -477,7 +474,7 @@ main {
 /*===================
     dark-mode style
 ===================*/
-#dark-mode-toggle {
+.dark-mode-btn {
   font-size: 1.6rem;
   font-family: var(--english);
   font-weight: 500;
@@ -492,10 +489,15 @@ body {
   transition: background-color 0.3s, color 0.3s; /* じわ〜っと色を変える魔法 */
 }
 
+body.dark-mode header h1 {
+  color: var(--darkModeFontColor);
+}
+
 /* ダークモード（夜） */
 body.dark-mode,
 body.dark-mode input,
 body.dark-mode textarea,
+body.dark-mode .menu-list,
 body.dark-mode .set-question,
 body.dark-mode .user-answer,
 body.dark-mode .supplement-message,
@@ -507,6 +509,28 @@ body.dark-mode .correct-answer-area,
 body.dark-mode .user-answer-title {
   background-color: var(--darkModeBaseColor); /* 濃いグレー */
   color: var(--darkModeFontColor);            /* 柔らかい白 */
-  border: var(--borderStyle);
 }
 
+body.dark-mode,
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode .menu-list,
+body.dark-mode .set-question,
+body.dark-mode .correct-answer-area,
+body.dark-mode .user-answer-area {
+  border: var(--darkModeBorderStyle);
+  box-shadow: var(--darkModeItemShadow);
+}
+
+body.dark-mode .judgement-answer-btn,
+body.dark-mode .next-question-btn,
+body.dark-mode .retry-btn {
+  color: var(--darkModeFontColor);
+  background-color: var(--darkModeBtnColor);
+}
+
+body.dark-mode .menu-item,
+body.dark-mode .return-menu-btn,
+body.dark-mode .dark-mode-btn {
+  color: var(--darkModeFontColor);
+}

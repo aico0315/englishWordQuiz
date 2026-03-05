@@ -25887,7 +25887,7 @@ const resultMessageIconLeft = document.querySelector(".result-message-icon-left"
 const resultMessageIconRight = document.querySelector(".result-message-icon-right");
 
 const body = document.querySelector("body");
-const darkModeToggleBtn = document.getElementById("dark-mode-toggle");
+const darkModeToggleBtn = document.getElementById("dark-mode-toggle-btn");
 const webTitle = document.querySelector(".web-title");
 
 // メニューエリア変数
