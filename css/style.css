@@ -417,29 +417,39 @@ main {
     clear-area
 ===================*/
 .clear-area {
-  /* position: relative; */
   display: grid;
   place-items: center;
-  margin: 0 auto;
-  margin-top: 70px;
-  width: 65%;
-  height: 50%;
-  background-color: rgba(239, 226, 234, 0.3);
+  grid-template-rows: 30% 15% 20%;
+  gap: var(--space-m);
+  margin-top: var(--space-l);
+  width: 100%;
+  height: 80%;
+  background-color: var(--baseColor);
   box-shadow: var(--itemShadow);
   border-radius: 4px;
   z-index: 10;
 }
 
 .clear-message {
-  font-size: 2.5rem;
+  font-size: 3.2rem;
   font-family:var(--japanese);
   font-weight: 700;
   color: var(--questionColor);
 }
 
 .clear-text {
-  font-size: 1.6rem;
+  font-size: 2.4rem;
   font-family: var(--japanese);
+}
+
+.clear-img-area {
+  width: 100%;
+  /* height: 30%; */
+}
+
+.clear-img-area svg {
+  width: 100%;
+  /* height: 100%; */
 }
 
 /* .retry-btn {
@@ -506,7 +516,9 @@ body.dark-mode .add-japanese-area,
 body.dark-mode .add-supplement-area,
 body.dark-mode .word-item,
 body.dark-mode .correct-answer-area,
-body.dark-mode .user-answer-title {
+body.dark-mode .user-answer-title,
+body.dark-mode .clear-area,
+body.dark-mode .clear-area p {
   background-color: var(--darkModeBaseColor); /* 濃いグレー */
   color: var(--darkModeFontColor);            /* 柔らかい白 */
 }
@@ -517,7 +529,8 @@ body.dark-mode textarea,
 body.dark-mode .menu-list,
 body.dark-mode .set-question,
 body.dark-mode .correct-answer-area,
-body.dark-mode .user-answer-area {
+body.dark-mode .user-answer-area,
+body.dark-mode .clear-area {
   border: var(--darkModeBorderStyle);
   box-shadow: var(--darkModeItemShadow);
 }
