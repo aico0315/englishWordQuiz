@@ -56,6 +56,10 @@ header {
   justify-content: space-between;
 }
 
+/* .is-hidden {
+  display: none !important;
+} */
+
 .counter-area {
   text-align: center;
   margin-top: var(--space-s);

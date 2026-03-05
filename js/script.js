@@ -26276,12 +26276,12 @@ shuffleQuestions();
 
 //ロード後
 document.addEventListener("DOMContentLoaded", ()=>{
+  allViewHidden();
   const modeResult = localStorage.getItem("isDarkMode");
   const displayMode = JSON.parse(modeResult);
   if(displayMode){
     body.classList.add("dark-mode");
   }
-  allViewHidden();
   menuViewDisplay();
 });
 
