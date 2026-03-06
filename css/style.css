@@ -59,8 +59,9 @@ header {
 }
 
 .counter-area {
-  text-align: center;
-  margin-top: var(--space-s);
+  justify-self: center;
+  /* align-self: center; */
+  margin-top: 32px;
   font-size: 1.6rem;
   font-family: var(--english);
 }
@@ -120,9 +121,9 @@ main {
   border-radius: var(--radius);
   display: grid;
   place-items: center;
-  grid-template-rows: 35% 30% 35%;
+  grid-template-rows: 25% 20% 25% 40%;
   width: 100%;
-  height: 60%;
+  height: 80%;
 }
 
 .menu-item {
@@ -130,6 +131,16 @@ main {
   font-family: var(--japanese);
   color: var(--mainColor);
   font-weight: 500;
+}
+
+.menuArea-img-area {
+  width: 100%;
+  display: grid;
+}
+
+.menuArea-img-area svg {
+  width: 95%;
+  justify-self: center;
 }
 
 /*===================
@@ -145,6 +156,27 @@ main {
   gap: var(--space-m);
 }
 
+.counter-and-img-area {
+  margin-top: var(--space-s);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+}
+
+.questionArea-img-left,
+.questionArea-img-right {
+  justify-self: center;
+  width: 100px;
+  height: 100px;
+}
+
+.questionArea-img-left svg,
+.questionArea-img-right svg {
+  justify-self: end;
+  width: 100%;
+  height: 120%;
+}
+
 .set-question {
   display: grid;
   place-items: center;
@@ -155,7 +187,7 @@ main {
   white-space: pre-wrap;
   background-color: var(--sectionBaseColor);
   width: 100%;
-  height: 100%;
+  height: 95%;
   box-shadow: var(--itemShadow);
   border-radius: var(--radius);
 }
@@ -218,11 +250,12 @@ main {
 }
 
 .result-message-area {
+  align-self: center;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   place-items: center;
   width: 90%;
-  height: 80px;
+  /* height: 80px; */
 }
 
 .result-message {
@@ -235,14 +268,14 @@ main {
 
 .result-message-icon-left,
 .result-message-icon-right {
-  width: 80px;
-  height: 80px;
+  width: 110px;
+  height: 110px;
 }
 
 .result-message-icon-left svg,
 .result-message-icon-right svg {
   width: 100%;
-  height: 100%;
+  height: 110%;
   /* display: block; */
 }
 
