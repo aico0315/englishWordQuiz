@@ -416,9 +416,9 @@ shuffleQuestions();
 
 //ロード後
 document.addEventListener("DOMContentLoaded", ()=>{
-  allViewHidden();
   menuAreaImgArea.innerHTML = images.talkingChildren;
-  
+  allViewHidden();
+
   const modeResult = localStorage.getItem("isDarkMode");
   const displayMode = JSON.parse(modeResult);
   if(displayMode){
