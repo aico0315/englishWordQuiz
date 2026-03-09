@@ -60,7 +60,6 @@ header {
 
 .counter-area {
   justify-self: center;
-  /* align-self: center; */
   margin-top: 32px;
   font-size: 1.6rem;
   font-family: var(--english);
@@ -208,7 +207,6 @@ main {
   color: rgb(22, 20, 20);
   width: 100%;
   height: 100%;
-  /* border: 1px solid rgba(128, 128, 128, 0.201); */
   background-color: var(--sectionBaseColor);
   box-shadow: var(--itemShadow);
   border-radius: var(--radius);
@@ -245,8 +243,6 @@ main {
   place-items: center;
   grid-template-rows: 10% 8% 30% 20% 15% 5%;
   gap: var(--space-s);
-  /* align-items: center; */
-  /* position: absolute; */
 }
 
 .result-message-area {
@@ -255,7 +251,6 @@ main {
   grid-template-columns: 1fr 3fr 1fr;
   place-items: center;
   width: 90%;
-  /* height: 80px; */
 }
 
 .result-message {
@@ -276,17 +271,14 @@ main {
 .result-message-icon-right svg {
   width: 100%;
   height: 110%;
-  /* display: block; */
 }
 
 
 
 .correct-answer-title {
   width: 95%;
-  /* height: 3%; */
   font-size: 1.2rem;
   font-family: var(--japanese);
-  /* margin-top: 20px; */
 }
 
 .correct-answer-area {
@@ -349,23 +341,14 @@ main {
   border-radius: 0 0 8px 8px;
 }
 
-/* .next-question-btn {
-  font-size: 3.6rem;
-  padding: 10px;
-  margin-top: 20px;
-} */
-
 /*==================
   add-question-area
 ===================*/
 .add-question-area {
   display: grid;
-  /* grid-template-rows: 80px 80px 100px; */
-  /* gap: 20px; */
   place-items: center;
   width: 100%;
   height: 100%;
-  /* margin-top: 50px; */
 }
 
 .add-area {
@@ -377,7 +360,6 @@ main {
   gap: var(--space-m);
   place-items: center;
   width: 100%;
-  /* height: 100%; */
   margin-top: var(--space-m);
   padding: var(--space-l) var(--space-s);
 }
@@ -385,7 +367,6 @@ main {
 .add-english-area,
 .add-japanese-area {
   width: 100%;
-  /* height: 40%; */
   font-size: 1.4rem;
   color: dimgray;
 }
@@ -407,7 +388,6 @@ main {
   font-size: 2rem;
   margin-top: 10px;
   padding: 10px;
-  /* text-align: center; */
 }
 
 .input-english-word {
@@ -425,7 +405,6 @@ main {
   height: 60%;
   font-size: 1.8rem;
   font-family: var(--japanese);
-  /* text-align: center; */
   margin-top: 10px;
   padding: 10px;
 }
@@ -436,7 +415,6 @@ main {
   padding: 10px;
   border: var(--darkModeBorderStyle);
   border-radius: var(--radius);
-  /* margin-top: 10px; */
 }
 
 .delete-question-area {
@@ -468,7 +446,7 @@ main {
 .clear-area {
   display: grid;
   place-items: center;
-  grid-template-rows: 30% 15% 20%;
+  grid-template-rows: 30% 15% 20% 3%;
   gap: var(--space-m);
   margin-top: var(--space-l);
   width: 100%;
@@ -489,39 +467,26 @@ main {
 .clear-text {
   font-size: 2.4rem;
   font-family: var(--japanese);
+  line-height: 1.4;
 }
 
 .clear-img-area {
   width: 100%;
-  /* height: 30%; */
 }
 
 .clear-img-area svg {
   width: 100%;
-  /* height: 100%; */
 }
-
-/* .retry-btn {
-  border: 1px solid;
-  border-radius: 4px;
-  font-size: 2.5rem;
-  font-family:var(--japanese);
-  font-weight: 700;
-  color: rgb(255, 255, 255);
-  padding: 5px;
-} */
 
 /*===================
     toggle style
 ===================*/
 .true-style {
-  /* background-color: var(--accentColorGreen); */
   color: var(--accentColorGreen);
   font-weight: 700;
 }
 
 .false-style {
-  /* background-color: var(--accentColorRed); */
   color: var(--accentColorRed);
   font-weight: 700;
 }
