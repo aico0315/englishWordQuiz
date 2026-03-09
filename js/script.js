@@ -275,7 +275,7 @@ function wordDelete (){
   editAreaWordList.innerHTML = "";
 
   for(let i = 0; i < userAddedRecords.length; i++){
-    const editItem = `<div class="word-list"><p class="word-item-en text-ellipsis">${[i +1]}. ${userAddedRecords[i].question}</p><p class="word-item-ja text-ellipsis">：${userAddedRecords[i].answer[0]}</p><button class="edit-btn" data-index=${i}>：編集</button><button class="delete-btn" data-index=${i}>：削除</button></div>`;
+    const editItem = `<div class="word-list"><p class="word-item-en text-ellipsis">${[i +1]}. ${userAddedRecords[i].question}</p><p class="word-item-ja text-ellipsis">：${userAddedRecords[i].answer[0]}</p><button class="edit-btn" data-index=${i}>：<svg class="edit-btn-img">${images.editBtnImage}</svg></button><button class="delete-btn" data-index=${i}>：<svg class="edit-btn-img">${images.deleteBtnImg}</svg></button></div>`;
     editAreaWordList.innerHTML += editItem;
   }
 

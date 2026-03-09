@@ -437,7 +437,7 @@ main {
 
 .word-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 0.5fr 0.5fr;
+  grid-template-columns: 1fr 1fr 0.4fr 0.4fr;
   font-size: 1.6rem;
 }
 
@@ -445,6 +445,11 @@ main {
   margin-top: 15px;
   font-family: var(--japanese);
   color: dimgray;
+}
+
+.edit-btn-img {
+  width: 23px;
+  height: 23px;
 }
 
 .text-ellipsis {
