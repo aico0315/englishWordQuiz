@@ -413,32 +413,48 @@ main {
   font-size: 3.6rem;
   font-family: var(--japanese);
   padding: 10px;
+  background-color: var(--btnColor);
   border: var(--darkModeBorderStyle);
   border-radius: var(--radius);
 }
 
-.delete-question-area {
+.edit-question-area {
   width: 100%;
   padding: 0 var(--space-s);
 }
 
-.delete-question-area-title {
+.edit-question-area-title {
   font-size: 2rem;
   font-family: var(--japanese);
   margin-top: 50px;
 }
 
-#deleteArea-wordList {
-  font-size: 1.8rem;
-  margin-top: 40px;
+#editArea-wordList {
+  margin: 40px 0;
+  display: grid;
+  gap: var(--space-m);
+}
+
+.word-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.5fr 0.5fr;
+  font-size: 1.6rem;
 }
 
 .word-item {
   margin-top: 15px;
-  font-size: 1.6rem;
   font-family: var(--japanese);
   color: dimgray;
 }
+
+.text-ellipsis {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 
 /*==================
     clear-area

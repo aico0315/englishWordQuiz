@@ -45,7 +45,7 @@ const inputSupplementaryInformation = document.querySelector(".input-supplementa
 const addBtn = document.querySelector(".add-btn");
 
 // 単語削除エリア
-const deleteAreaWordList = document.getElementById("deleteArea-wordList");
+const editAreaWordList = document.getElementById("editArea-wordList");
 
 // 全問回答エリア
 const clearArea = document.querySelector(".clear-area");
@@ -272,11 +272,11 @@ function getLocalStorageData (){
 
 //登録単語の削除
 function wordDelete (){
-  deleteAreaWordList.innerHTML = "";
+  editAreaWordList.innerHTML = "";
 
   for(let i = 0; i < userAddedRecords.length; i++){
-    const deleteItem = `<p class="word-item">${[i +1]}.${userAddedRecords[i].question}：${userAddedRecords[i].answer[0]}：<button class="edit-btn" data-index=${i}>編集</button>：<button class="delete-btn" data-index=${i}>削除</button></p>`;
-    deleteAreaWordList.innerHTML += deleteItem;
+    const editItem = `<div class="word-list"><p class="word-item-en text-ellipsis">${[i +1]}. ${userAddedRecords[i].question}</p><p class="word-item-ja text-ellipsis">：${userAddedRecords[i].answer[0]}</p><button class="edit-btn" data-index=${i}>：編集</button><button class="delete-btn" data-index=${i}>：削除</button></div>`;
+    editAreaWordList.innerHTML += editItem;
   }
 
   const editBtn = document.querySelectorAll(".edit-btn");
@@ -302,10 +302,10 @@ function wordDelete (){
   deleteBtn.forEach((btn)=> {
     btn.addEventListener("click", ()=> {
       const clickedIndex = btn.dataset.index;
-      const deletedWordsList = userAddedRecords.filter((word, i)=> i !== Number(clickedIndex));
+      const editedWordsList = userAddedRecords.filter((word, i)=> i !== Number(clickedIndex));
       alert("削除しました");
 
-      userAddedRecords = deletedWordsList;
+      userAddedRecords = editedWordsList;
       localStorage.setItem("userWords", JSON.stringify(userAddedRecords));
       wordDelete();
     });
