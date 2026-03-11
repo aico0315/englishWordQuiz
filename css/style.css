@@ -435,10 +435,18 @@ main {
   gap: var(--space-m);
 }
 
-.word-list {
+.word-list,
+.accordion-area {
   display: grid;
-  grid-template-columns: 1fr 1fr 0.4fr 0.4fr;
+  grid-template-columns: 1fr 1fr;
   font-size: 1.6rem;
+}
+
+.accordion-area {
+  display: grid;
+  grid-template-columns: 1fr 0.18fr 0.18fr;
+  padding-left: var(--space-s);
+  transition: background-color 0.3s, color 0.3s; /* じわ〜っと色を変える魔法 */
 }
 
 .word-item {
@@ -453,7 +461,7 @@ main {
 }
 
 .text-ellipsis {
-  width: 100px;
+  width: 160px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
