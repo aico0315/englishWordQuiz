@@ -275,8 +275,8 @@ function wordDelete (){
   editAreaWordList.innerHTML = "";
 
   for(let i = 0; i < userAddedRecords.length; i++){
-    const editItem = `<div class="word-list"><p class="word-item-en text-ellipsis">${[i +1]}. ${userAddedRecords[i].question}</p><p class="word-item-ja text-ellipsis">/${userAddedRecords[i].answer[0]}</p></div>
-    <div class="accordion-area hidden"><p class="supplement">${userAddedRecords[i].supplement}</p><button class="edit-btn" data-index=${i}><img class="edit-btn-img" src="image/editBtnImg.svg"></button><button class="delete-btn" data-index=${i}><img class="edit-btn-img" src="image/deleteBtnImg.svg"></button></div>`;
+    const editItem = `<div class="word-list"><p class="word-item-en text-ellipsis">${[i +1]}. ${userAddedRecords[i].question}</p><p class="word-item-ja text-ellipsis">/  ${userAddedRecords[i].answer[0]}</p>︙</div>
+    <div class="accordion-area"><p class="supplement">${userAddedRecords[i].supplement}</p><button class="edit-btn" data-index=${i}><img class="edit-btn-img" src="image/editBtnImg.svg"></button><button class="delete-btn" data-index=${i}><img class="edit-btn-img" src="image/deleteBtnImg.svg"></button></div>`;
     editAreaWordList.innerHTML += editItem;
 
     const wordList = document.querySelectorAll(".word-list");
@@ -284,10 +284,7 @@ function wordDelete (){
 
     wordList.forEach((btn, i) =>{
       btn.addEventListener("click", ()=> {
-        console.log(accordionArea.length);
-        // const clickedIndex = btn.getAttribute("data-index");
-        // console.log("取得した番号:", clickedIndex);
-        accordionArea[i].classList.toggle("hidden");
+        accordionArea[i].classList.toggle("active");
       });
     });
   }

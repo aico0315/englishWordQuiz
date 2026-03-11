@@ -364,6 +364,11 @@ main {
   padding: var(--space-l) var(--space-s);
 }
 
+.word-english,
+.word-japanese {
+  padding-left: var(--space-s);
+}
+
 .add-english-area,
 .add-japanese-area {
   width: 100%;
@@ -432,21 +437,38 @@ main {
 #editArea-wordList {
   margin: 40px 0;
   display: grid;
-  gap: var(--space-m);
+  gap: var(--space-s);
+  font-size: 1.6rem;
 }
 
-.word-list,
-.accordion-area {
+.word-list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  font-size: 1.6rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--itemShadow);
+  padding: 4px;
 }
 
 .accordion-area {
   display: grid;
   grid-template-columns: 1fr 0.18fr 0.18fr;
   padding-left: var(--space-s);
-  transition: background-color 0.3s, color 0.3s; /* じわ〜っと色を変える魔法 */
+  max-height: 0;      /* 高さを0に */
+  overflow: hidden;    /* はみ出た中身を隠す */
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.accordion-area.active {
+  display: grid;
+  grid-template-columns: 1fr 0.18fr 0.18fr;
+  padding-left: var(--space-s);
+  background-color: var(--btnColor);
+  border-radius: var(--radius);
+  max-height: 200px;  /* 中身が入る十分な高さを指定 */
+  opacity: 1;
+  align-items: center;
 }
 
 .word-item {
@@ -461,7 +483,7 @@ main {
 }
 
 .text-ellipsis {
-  width: 160px;
+  width: 150px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
