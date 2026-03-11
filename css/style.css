@@ -581,6 +581,8 @@ body.dark-mode .add-english-area,
 body.dark-mode .add-japanese-area,
 body.dark-mode .add-supplement-area,
 body.dark-mode .word-item,
+body.dark-mode .accordion-area.active,
+/* body.dark-mode .supplement, */
 body.dark-mode .correct-answer-area,
 body.dark-mode .user-answer-title,
 body.dark-mode .clear-area,
