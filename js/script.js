@@ -42,6 +42,7 @@ const addQuestionArea = document.querySelector(".add-question-area");
 const inputEnglishWord = document.querySelector(".input-english-word");
 const inputJapaneseWord = document.querySelector(".input-japanese-word");
 const inputSupplementaryInformation = document.querySelector(".input-supplementary-information");
+const cancelBtn = document.querySelector(".cancel-btn");
 const addBtn = document.querySelector(".add-btn");
 
 // 単語削除エリア
@@ -275,7 +276,7 @@ function wordDelete (){
   editAreaWordList.innerHTML = "";
 
   for(let i = 0; i < userAddedRecords.length; i++){
-    const editItem = `<div class="word-list"><p class="word-item-en text-ellipsis">${[i +1]}. ${userAddedRecords[i].question}</p><p class="word-item-ja text-ellipsis">/  ${userAddedRecords[i].answer[0]}</p>︙</div>
+    const editItem = `<div class="word-list"><p class="word-item-en text-ellipsis">${[i +1]}. ${userAddedRecords[i].question}</p><p class="word-item-ja text-ellipsis">/  ${userAddedRecords[i].answer[0]}</p><p class="detail-mark">︙</p></div>
     <div class="accordion-area"><p class="supplement">${userAddedRecords[i].supplement}</p><button class="edit-btn" data-index=${i}><img class="edit-btn-img" src="image/editBtnImg.svg"></button><button class="delete-btn" data-index=${i}><img class="edit-btn-img" src="image/deleteBtnImg.svg"></button></div>`;
     editAreaWordList.innerHTML += editItem;
 
@@ -306,18 +307,29 @@ function wordDelete (){
       const buttonLabel = underEditIndex === null ? "登録" : "更新";
       addBtn.textContent = buttonLabel;
     })
-  })
+  });
+
+  cancelBtn.addEventListener("click", ()=>{
+    inputEnglishWord.value = "";
+    inputJapaneseWord.value = "";
+    inputSupplementaryInformation.value = "";
+    addBtn.textContent = "登録";
+  });
 
   //単語の削除ボタン実行
   deleteBtn.forEach((btn)=> {
     btn.addEventListener("click", ()=> {
       const clickedIndex = btn.dataset.index;
-      const editedWordsList = userAddedRecords.filter((word, i)=> i !== Number(clickedIndex));
-      alert("削除しました");
-
-      userAddedRecords = editedWordsList;
-      localStorage.setItem("userWords", JSON.stringify(userAddedRecords));
-      wordDelete();
+      const isDelete = confirm(`本当に${userAddedRecords[clickedIndex].question}を削除しますか？`);
+      if(!isDelete){
+        return;
+      }else{
+        const editedWordsList = userAddedRecords.filter((word, i)=> i !== Number(clickedIndex));
+        alert("削除しました");
+        userAddedRecords = editedWordsList;
+        localStorage.setItem("userWords", JSON.stringify(userAddedRecords));
+        wordDelete();
+      }
     });
   });
 }
