@@ -386,7 +386,7 @@ function answerAreaDisplay (savedIndex, savedResult, savedUserAnswer){
   if(questionResult){
     resultMessage.textContent = "正解!";
     resultMessageIconLeft.innerHTML = `<img src="image/correct/correctGirl.svg">`;
-    resultMessageIconRight.innerHTML = `<img src="image/correct/correctBoy.svg">`;
+    resultMessageIconRight.innerHTML = `<img src="image/correct/correctBoy@72x.webp">`;
     resultMessage.classList.add("true-style");
   }else{
     resultMessage.textContent = "残念!";
