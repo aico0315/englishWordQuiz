@@ -267,8 +267,8 @@ main {
   height: 110px;
 }
 
-.result-message-icon-left svg,
-.result-message-icon-right svg {
+.result-message-icon-left img,
+.result-message-icon-right img {
   width: 100%;
   height: 110%;
 }
@@ -430,7 +430,7 @@ main {
   text-align: center;
   padding: var(--space-s);
   background-color: var(--btnColor);
-  border: var(--darkModeBorderStyle);
+  box-shadow: var(--itemShadow);
   border-radius: var(--radius);
   width: 95%;
   height: 75%;
@@ -617,7 +617,7 @@ body.dark-mode .clear-area p {
   color: var(--darkModeFontColor);            /* 柔らかい白 */
 }
 
-body.dark-mode,
+/* body.dark-mode, */
 body.dark-mode input,
 body.dark-mode textarea,
 body.dark-mode .menu-list,
@@ -643,4 +643,8 @@ body.dark-mode .menu-item,
 body.dark-mode .return-menu-btn,
 body.dark-mode .dark-mode-btn {
   color: var(--darkModeFontColor);
+}
+
+body.dark-mode .accordion-area.active {
+  background-color: var(--darkModeBtnColor);
 }

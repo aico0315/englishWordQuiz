@@ -219,6 +219,17 @@ function saveData (){
 
 //単語追加処理
 function addQuestionData (){
+  if(!inputEnglishWord.value.trim()){
+    alert("英単語を入力してください");
+    return;
+  }
+
+  if(!inputJapaneseWord.value.trim()){
+    alert("日本語を入力してください");
+    return;
+  }
+
+
   const userInput = isInputData();
 
   const userInputJapanese = userInput.japanese;
@@ -374,13 +385,13 @@ function answerAreaDisplay (savedIndex, savedResult, savedUserAnswer){
 
   if(questionResult){
     resultMessage.textContent = "正解!";
-    resultMessageIconLeft.innerHTML = images.correctGirl;
-    resultMessageIconRight.innerHTML = images.correctBoy;
+    resultMessageIconLeft.innerHTML = `<img src="image/correct/correctGirl.svg">`;
+    resultMessageIconRight.innerHTML = `<img src="image/correct/correctBoy.svg">`;
     resultMessage.classList.add("true-style");
   }else{
     resultMessage.textContent = "残念!";
-    resultMessageIconLeft.innerHTML = images.notCorrectBoyGreen;
-    resultMessageIconRight.innerHTML = images.notCorrectGirl;
+    resultMessageIconLeft.innerHTML = `<img src="image/notCorrect/notCorrectBoyBlue.svg">`;
+    resultMessageIconRight.innerHTML = `<img src="image/notCorrect/notCorrectGirl.svg">`;
     resultMessage.classList.add("false-style");
   }
 
