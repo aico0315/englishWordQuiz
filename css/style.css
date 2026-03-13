@@ -386,8 +386,8 @@ main {
 
 .input-english-word,
 .input-japanese-word {
-  border: 1px solid rgba(128, 128, 128, 0.201);
-  border-radius: 4px;
+  box-shadow: var(--itemShadow);
+  border-radius: var(--radius);
   width: 100%;
   height: 100%;
   font-size: 2rem;
@@ -404,14 +404,15 @@ main {
 }
 
 .input-supplementary-information {
-  border: 1px solid rgba(128, 128, 128, 0.201);
-  border-radius: 4px;
+  box-shadow: var(--itemShadow);
+  border-radius: var(--radius);
   width: 100%;
   height: 60%;
   font-size: 1.8rem;
   font-family: var(--japanese);
   margin-top: 10px;
   padding: 10px;
+  white-space: pre-wrap;
 }
 
 .add-btn-area {
@@ -435,6 +436,11 @@ main {
   height: 75%;
 }
 
+.cancel-btn {
+  letter-spacing: -0.2rem;
+}
+
+/* 編集エリア */
 .edit-question-area {
   width: 100%;
   padding: 0 var(--space-s);
@@ -462,8 +468,21 @@ main {
   padding: var(--space-s);
 }
 
+.word-item {
+  margin-top: 15px;
+  font-family: var(--japanese);
+  color: dimgray;
+}
+
+.text-ellipsis {
+  width: 145px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .detail-mark {
-  width: 40px;
+  width: 100%;
   text-align: start;
 }
 
@@ -480,33 +499,23 @@ main {
 .accordion-area.active {
   display: grid;
   grid-template-columns: 1fr 0.18fr 0.18fr;
-  padding-left: var(--space-s);
+  padding: var(--space-s);
   background-color: var(--btnColor);
   border-radius: var(--radius);
   max-height: 200px;  /* 中身が入る十分な高さを指定 */
   opacity: 1;
   align-items: center;
+  margin-top: -7px;
 }
 
-.word-item {
-  margin-top: 15px;
-  font-family: var(--japanese);
-  color: dimgray;
+.supplement {
+  white-space: pre-wrap;
 }
 
 .edit-btn-img {
   width: 23px;
   height: 23px;
 }
-
-.text-ellipsis {
-  width: 145px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
 
 /*==================
     clear-area
@@ -624,6 +633,7 @@ body.dark-mode .clear-area {
 body.dark-mode .judgement-answer-btn,
 body.dark-mode .next-question-btn,
 body.dark-mode .add-btn,
+body.dark-mode .cancel-btn,
 body.dark-mode .retry-btn {
   color: var(--darkModeFontColor);
   background-color: var(--darkModeBtnColor);
