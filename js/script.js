@@ -288,7 +288,7 @@ function wordDelete (){
 
   for(let i = 0; i < userAddedRecords.length; i++){
     const editItem = `<div class="word-list"><p class="word-item-en text-ellipsis">${[i +1]}. ${userAddedRecords[i].question}</p><p class="word-item-ja text-ellipsis">/  ${userAddedRecords[i].answer[0]}</p><p class="detail-mark">︙</p></div>
-    <div class="accordion-area"><p class="supplement">${userAddedRecords[i].supplement}</p><button class="edit-btn" data-index=${i}><img class="edit-btn-img" src="image/editBtnImg.svg"></button><button class="delete-btn" data-index=${i}><img class="edit-btn-img" src="image/deleteBtnImg.svg"></button></div>`;
+    <div class="accordion-area"><p class="supplement">${userAddedRecords[i].supplement}</p><button class="edit-btn" data-index=${i}><img class="edit-btn-img" src="image/subImage/editBtn@72x.webp"></button><button class="delete-btn" data-index=${i}><img class="delete-btn-img" src="image/subImage/deleteBtn@72x.webp"></button></div>`;
     editAreaWordList.innerHTML += editItem;
 
     const wordList = document.querySelectorAll(".word-list");
@@ -385,8 +385,8 @@ function answerAreaDisplay (savedIndex, savedResult, savedUserAnswer){
 
   if(questionResult){
     resultMessage.textContent = "正解!";
-    resultMessageIconLeft.innerHTML = `<img src="image/correct/correctGirl.svg">`;
-    resultMessageIconRight.innerHTML = `<img src="image/correct/correctBoy@72x.webp">`;
+    resultMessageIconLeft.innerHTML = `<img src="image/subImage/correctGirl@72x.webp">`;
+    resultMessageIconRight.innerHTML = `<img src="image/subImage/correctBoy@72x.webp">`;
     resultMessage.classList.add("true-style");
   }else{
     resultMessage.textContent = "残念!";
@@ -449,7 +449,7 @@ shuffleQuestions();
 
 //ロード後
 document.addEventListener("DOMContentLoaded", ()=>{
-  menuAreaImgArea.innerHTML = `<img src="image/talkingChildren.svg">`;
+  menuAreaImgArea.innerHTML = `<img src="image/subImage/talkingChildren@72x.webp">`;
   allViewHidden();
 
   const modeResult = localStorage.getItem("isDarkMode");

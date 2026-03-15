@@ -263,14 +263,14 @@ main {
 
 .result-message-icon-left,
 .result-message-icon-right {
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  /* height: 110px; */
 }
 
 .result-message-icon-left img,
 .result-message-icon-right img {
   width: 100%;
-  height: 110%;
+  height: 100%;
 }
 
 
@@ -512,9 +512,15 @@ main {
   white-space: pre-wrap;
 }
 
-.edit-btn-img {
-  width: 23px;
-  height: 23px;
+.edit-btn,
+.delete-btn {
+  width: 22px;
+  height: 25px;
+}
+.edit-btn-img,
+.delete-btn-img {
+  width: 100%;
+  height: 100%;
 }
 
 /*==================
