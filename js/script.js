@@ -446,10 +446,11 @@ function loadQuiz (){
 //イベント
 
 shuffleQuestions();
+const targetImage = `<img src="image/subImage/talkingChildren@72x.webp">`;
 
 //ロード後
 document.addEventListener("DOMContentLoaded", ()=>{
-  menuAreaImgArea.innerHTML = `<img src="image/subImage/talkingChildren@72x.webp">`;
+  menuAreaImgArea.innerHTML = targetImage;
   allViewHidden();
 
   const modeResult = localStorage.getItem("isDarkMode");
