@@ -60,6 +60,9 @@ const targetImages = [
   "image/subImage/talkingChildren@72x.webp",
   "image/subImage/correctBoy@72x.webp",
   "image/subImage/correctGirl@72x.webp",
+  "image/subImage/notCorrectGirl@72x.webp",
+  "image/subImage/notCorrectBoyBlue@72x.webp",
+  "image/subImage/notCorrectBoyGreen@72x.webp",
   "image/subImage/deleteBtn@72x.webp",
   "image/subImage/editBtn@72x.webp",
 ];
@@ -406,8 +409,8 @@ function answerAreaDisplay (savedIndex, savedResult, savedUserAnswer){
     resultMessage.classList.add("true-style");
   }else{
     resultMessage.textContent = "残念!";
-    resultMessageIconLeft.innerHTML = `<img src="image/notCorrect/notCorrectBoyBlue.svg">`;
-    resultMessageIconRight.innerHTML = `<img src="image/notCorrect/notCorrectGirl.svg">`;
+    resultMessageIconLeft.innerHTML = `<img src="image/subImage/notCorrectBoyBlue@72x.webp">`;
+    resultMessageIconRight.innerHTML = `<img src="image/subImage/notCorrectGirl@72x.webp">`;
     resultMessage.classList.add("false-style");
   }
 
