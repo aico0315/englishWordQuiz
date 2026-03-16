@@ -55,6 +55,16 @@ const retryBtn = document.querySelector(".retry-btn");
 // ホームボタン（メニューへ戻る）
 const returnMenuBtn = document.querySelectorAll(".return-menu-btn");
 
+//画像プレロード
+const targetImages = [
+  "image/subImage/talkingChildren@72x.webp",
+  "image/subImage/correctBoy@72x.webp",
+  "image/subImage/correctGirl@72x.webp",
+  "image/subImage/deleteBtn@72x.webp",
+  "image/subImage/editBtn@72x.webp",
+];
+
+
 
 //ユーザーが登録した単語
 let userAddedRecords = [];
@@ -177,6 +187,12 @@ function isInputData (){
   return userInput;
 }
 
+function preload(imgPaths){
+  imgPaths.forEach((imgPath)=> {
+    const preImg = new Image();
+    preImg.src = imgPath;
+  });
+}
 
 //問題をシャッフルする
 function shuffleQuestions (){
@@ -446,11 +462,11 @@ function loadQuiz (){
 //イベント
 
 shuffleQuestions();
-const targetImage = `<img src="image/subImage/talkingChildren@72x.webp">`;
+preload(targetImages);
 
 //ロード後
 document.addEventListener("DOMContentLoaded", ()=>{
-  menuAreaImgArea.innerHTML = targetImage;
+  menuAreaImgArea.innerHTML = `<img src="image/subImage/talkingChildren@72x.webp">`
   allViewHidden();
 
   const modeResult = localStorage.getItem("isDarkMode");
