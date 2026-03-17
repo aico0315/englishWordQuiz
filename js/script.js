@@ -433,6 +433,12 @@ function answerAreaDisplay (savedIndex, savedResult, savedUserAnswer){
 
 //復元処理
 function loadQuiz (){
+  const userWords = getLocalStorageData();
+  if(userWords.length === 0){
+    alert("単語追加画面から単語を登録してね");
+    return;
+  }
+
   const stateData = localStorage.getItem('quizState');
   if(!stateData){
     console.alert("データがありません はじめからスタートしてね");
@@ -491,7 +497,7 @@ darkModeToggleBtn.addEventListener("click", ()=>{
 //はじめからスタート
 questionNewStartBtn.addEventListener("click", ()=> {
   const userWords = getLocalStorageData();
-  
+
   if(userWords.length === 0){
     alert("単語追加画面から単語を登録してね");
     return;
