@@ -635,6 +635,7 @@ body.dark-mode .set-question,
 body.dark-mode .correct-answer-area,
 body.dark-mode .user-answer-area,
 body.dark-mode .add-area,
+body.dark-mode .word-list,
 body.dark-mode .clear-area {
   border: var(--darkModeBorderStyle);
   box-shadow: var(--darkModeItemShadow);
