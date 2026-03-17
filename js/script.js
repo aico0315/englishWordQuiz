@@ -490,13 +490,14 @@ darkModeToggleBtn.addEventListener("click", ()=>{
 
 //はじめからスタート
 questionNewStartBtn.addEventListener("click", ()=> {
-  if(!getLocalStorageData){
+  currentIndex = 0;
+  const userWords = getLocalStorageData();
+
+  if(userWords === undefined){
     alert("単語追加画面から単語を登録してね");
     return;
   }
-
-  currentIndex = 0;
-  const userWords = getLocalStorageData();
+  
   userAddedRecords = userWords;
   shuffledQuestions = userWords;
 
