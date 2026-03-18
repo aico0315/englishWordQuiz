@@ -111,7 +111,9 @@ main {
   width: 100%;
   height: 90%;
   display: grid;
-  align-items: center;
+  place-items: center;
+  position: relative;
+  /* align-items: center; */
 }
 
 .menu-list {
@@ -120,7 +122,7 @@ main {
   border-radius: var(--radius);
   display: grid;
   place-items: center;
-  grid-template-rows: 25% 20% 25% 40%;
+  grid-template-rows: 25% 25% 40%;
   width: 100%;
   height: 80%;
 }
@@ -130,6 +132,56 @@ main {
   font-family: var(--japanese);
   color: var(--mainColor);
   font-weight: 500;
+}
+
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+}
+
+.mode-select-area {
+  opacity: 0;
+  z-index: -100;
+  border-radius: var(--radius);
+  box-shadow: var(--itemShadow);
+  display: grid;
+  place-items: center;
+  width: 90%;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: max-height 0.4s ease, background-color 0.6s ease, opacity 0.8s ease;
+}
+
+.mode-select-area.active {
+  opacity: 1;
+  z-index: 100;
+  border-radius: var(--radius);
+  box-shadow: var(--itemShadow);
+  display: grid;
+  grid-template-rows: 15% 15% 20%;
+  gap: 20px;
+  place-items: center;
+  width: 70%;
+  height: 60%;
+  padding: 20px 0;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: max-height 0.4s ease, background-color 0.6s ease, opacity 0.8s ease;
+}
+
+.category-btns-container {
+  display: grid;
+  gap: 20px;
 }
 
 .menuArea-img-area {
@@ -356,19 +408,21 @@ main {
   box-shadow: var(--itemShadow);
   border-radius: var(--radius);
   display: grid;
-  grid-template-rows: 20% 20% 30% 20%;
+  grid-template-rows: 15% 15% 15% 28% 20%;
   gap: var(--space-m);
   place-items: center;
   width: 100%;
-  margin-top: var(--space-m);
-  padding: var(--space-l) var(--space-s);
+  margin-top: var(--space-s);
+  padding: var(--space-m) var(--space-s);
 }
 
+.word-category,
 .word-english,
 .word-japanese {
   padding-left: var(--space-s);
 }
 
+.add-category-area,
 .add-english-area,
 .add-japanese-area {
   width: 100%;
@@ -384,6 +438,7 @@ main {
   margin-top: 20px;
 }
 
+.input-category,
 .input-english-word,
 .input-japanese-word {
   box-shadow: var(--itemShadow);
@@ -391,7 +446,7 @@ main {
   width: 100%;
   height: 100%;
   font-size: 2rem;
-  margin-top: 10px;
+  margin-top: 5px;
   padding: 10px;
 }
 
@@ -613,6 +668,7 @@ body.dark-mode .set-question,
 body.dark-mode .user-answer,
 body.dark-mode .supplement-message,
 body.dark-mode .add-area,
+body.dark-mode .add-category-area,
 body.dark-mode .add-english-area,
 body.dark-mode .add-japanese-area,
 body.dark-mode .add-supplement-area,

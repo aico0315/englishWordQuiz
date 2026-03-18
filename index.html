@@ -18,16 +18,28 @@
     <!-- メニューエリア -->
     <div id="menu-view" class="menu-area">
       <div class="menu-list">
-        <button class="question-newStart-btn menu-item">はじめから</button>
-        <button class="question-continue-btn menu-item">つづきから</button>
+        <button class="question-newStart-btn menu-item">はじめる</button>
         <button class="add-newQuestion-btn menu-item">単語を追加</button>
         <div class="menuArea-img-area"></div>
+      </div>
+      <div id="modal-overlay" class="hidden">
+        <div class="mode-select-area menu-list active">
+          <button class="question-continue-btn" type="button">つづきから</button>
+          <button class="weak-words-btn" type="button">苦手な単語</button>
+          <div id="category-btns-container" class="category-btns-container"></div>
+          <button class="close-btn" type="button">閉じる</button>
+        </div>
       </div>
     </div>
     <!-- 単語追加/編集エリア -->
     <div id="add-question-view" class="add-question-area hidden">
       <!-- 追加 -->
       <div class="add-area">
+        <div class="add-category-area">
+          <p class="word-category">カテゴリーを登録してね</p>
+          <input class="input-category" type="text" list="category-list" placeholder="「英単語」や「IT用語」など">
+          <datalist id="category-list"></datalist>
+        </div>
         <div class="add-english-area">
           <p class="word-english">覚えたい英単語を入力してね</p>
           <input class="input-english-word" type="text" name="input-add-question">

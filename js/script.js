@@ -17,6 +17,10 @@ const webTitle = document.querySelector(".web-title");
 
 // メニューエリア変数
 const menuArea = document.querySelector(".menu-area");
+const modalOverlay = document.getElementById("modal-overlay");
+const modeSelectArea = document.querySelector(".mode-select-area");
+const weakWordsBtn = document.querySelector(".weak-words-btn");
+const closeBtn = document.querySelector(".close-btn");
 const questionContinueBtn = document.querySelector(".question-continue-btn");
 const questionNewStartBtn = document.querySelector(".question-newStart-btn");
 const addNewQuestionBtn = document.querySelector(".add-newQuestion-btn");
@@ -39,6 +43,7 @@ const nextQuestionBtn = document.querySelector(".next-question-btn");
 
 // 単語追加エリア
 const addQuestionArea = document.querySelector(".add-question-area");
+const inputCategory = document.querySelector(".input-category");
 const inputEnglishWord = document.querySelector(".input-english-word");
 const inputJapaneseWord = document.querySelector(".input-japanese-word");
 const inputSupplementaryInformation = document.querySelector(".input-supplementary-information");
@@ -123,7 +128,17 @@ function displayOnlyAddQuestionArea (){
   answerArea.classList.add("hidden");
   clearArea.classList.add("hidden");
   menuArea.classList.add("hidden");
+
   userAddedRecords = getLocalStorageData();
+  const uniqueCategories = [...new Set(userAddedRecords.map(word => word.category))].filter(cat => cat);
+  const categoryList = document.getElementById("category-list");
+  categoryList.innerHTML = "";
+
+  uniqueCategories.forEach(category => {
+    const option = document.createElement("option");
+    option.value = category;
+    categoryList.appendChild(option);
+  });
   wordDelete();
 }
 
@@ -145,6 +160,7 @@ function allViewHidden (){
 
 //入力エリアをクリア
 function wordInputAreaAllClear (){
+  inputCategory.value = "";
   inputEnglishWord.value = "";
   inputJapaneseWord.value = "";
   inputSupplementaryInformation.value = "";
@@ -184,6 +200,7 @@ const hasNextQuestion = ()=> {
 //入力データの有無
 function isInputData (){
   const userInput = {
+    category: inputCategory ? inputCategory.value : "",
     english: inputEnglishWord ? inputEnglishWord.value : "",
     japanese: inputJapaneseWord ? inputJapaneseWord.value.split(/[、,]/) : "",
     supplement: inputSupplementaryInformation ? inputSupplementaryInformation.value : "",
@@ -249,13 +266,13 @@ function addQuestionData (){
     return;
   }
 
-
   const userInput = isInputData();
 
   const userInputJapanese = userInput.japanese;
   const answerArray = userInputJapanese;
 
   const addQuestion = {
+    category: userInput.category,
     question: userInput.english,
     answer: answerArray,
     supplement: userInput.supplement,
@@ -282,6 +299,7 @@ function wordRevised (){
   const updateWord = currentList.map((word, i)=> {
     if(i === underEditIndex){
       return {
+        category: userInput.category,
         question: userInput.english,
         answer: answerArray,
         supplement: userInput.supplement,
@@ -505,7 +523,7 @@ darkModeToggleBtn.addEventListener("click", ()=>{
 
 // == menu-area ==
 
-//はじめからスタート
+//はじめるbtn
 questionNewStartBtn.addEventListener("click", ()=> {
   const userWords = getLocalStorageData();
 
@@ -513,18 +531,63 @@ questionNewStartBtn.addEventListener("click", ()=> {
     alert("単語追加画面から単語を登録してね");
     return;
   }
-  currentIndex = 0;
-  userAddedRecords = userWords;
-  shuffledQuestions = userWords;
+
+  generateCategoryBtns();
+
+  function generateCategoryBtns(){
+    const container = document.getElementById("category-btns-container");
+    container.innerHTML = "";
+
+    const allWords = getLocalStorageData();
+    const uniqueCategories = [...new Set(allWords.map(word => word.category))].filter(cat => cat);
+
+    uniqueCategories.forEach(category => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "category-btn";
+      btn.textContent = category; //uniqueCategories配列の中のユーザーが登録したカテゴリー名
+      btn.dataset.category = category;
+
+      container.appendChild(btn);
+    })
+  }
+
+  modeSelectArea.classList.add("active");
+  modalOverlay.classList.remove("hidden");
+
+  // currentIndex = 0;
+  // userAddedRecords = userWords;
+  // shuffledQuestions = userWords;
+
+  // shuffleQuestions();
+  // newSetQuestion();
+  // saveData();
+});
+
+
+
+//保存データからのスタート
+questionContinueBtn.addEventListener("click", ()=> {
+  loadQuiz();
+});
+
+//苦手な単語データ
+weakWordsBtn.addEventListener("click", ()=> {
+  const currentList = getLocalStorageData();
+  const targetWords = currentList.filter(word => word.wrongCount > 0);
+  shuffledQuestions = targetWords;
 
   shuffleQuestions();
   newSetQuestion();
   saveData();
 });
 
-//保存データからのスタート
-questionContinueBtn.addEventListener("click", ()=> {
-  loadQuiz();
+
+
+//閉じるボタン
+closeBtn.addEventListener("click", ()=>{
+  modeSelectArea.classList.remove("active");
+  modalOverlay.classList.add("hidden");
 });
 
 //単語追加ページへの遷移
