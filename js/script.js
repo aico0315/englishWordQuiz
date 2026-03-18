@@ -50,6 +50,7 @@ const editAreaWordList = document.getElementById("editArea-wordList");
 
 // 全問回答エリア
 const clearArea = document.querySelector(".clear-area");
+const wrongWordBtn = document.querySelector(".wrong-word-btn");
 const retryBtn = document.querySelector(".retry-btn");
 
 // ホームボタン（メニューへ戻る）
@@ -339,6 +340,7 @@ function wordDelete (){
     })
   });
 
+  //キャンセルbtn実行
   cancelBtn.addEventListener("click", ()=>{
     inputEnglishWord.value = "";
     inputJapaneseWord.value = "";
@@ -412,6 +414,15 @@ function answerAreaDisplay (savedIndex, savedResult, savedUserAnswer){
     resultMessageIconLeft.innerHTML = `<img src="image/subImage/notCorrectBoyBlue@72x.webp">`;
     resultMessageIconRight.innerHTML = `<img src="image/subImage/notCorrectGirl@72x.webp">`;
     resultMessage.classList.add("false-style");
+
+    const currentList = getLocalStorageData();
+    const targetWord = currentList.find(word => word.question === currentQuiz.question);
+
+    if(targetWord){
+      targetWord.wrongCount = (targetWord.wrongCount || 0) +1;
+      localStorage.setItem("userWords", JSON.stringify(currentList));
+    }
+    console.log("現在のwrongCountは", targetWord.wrongCount);
   }
 
   questionAndAnswerHiddenToggle();
@@ -542,15 +553,6 @@ addBtn.addEventListener("click", ()=> {
   }
 });
 
-function openAccordion (){
-  const wordList = document.querySelector(".word-list");
-  const accordionArea = document.querySelector(".accordion-area");
-  wordList.addEventListener("click", ()=> {
-    accordionArea.classList.toggle("hidden");
-  });
-}
-
-
 
 
 // == question-area ==
@@ -590,11 +592,23 @@ retryBtn.addEventListener("click", ()=> {
   saveData();
 });
 
+//苦手単語へ挑戦btn
+wrongWordBtn.addEventListener("click", ()=>{
+  const allWords = getLocalStorageData();
+  const weakWords = allWords.filter(word => word.wrongCount > 0) || "まだ苦手な単語はありません";
+  shuffledQuestions = weakWords;
+
+  shuffleQuestions();
+  newSetQuestion();
+});
+
+//サイトロゴ押下でメニュー画面遷移
 webTitle.addEventListener("click", ()=> {
   allViewHidden();
   menuViewDisplay();
 });
 
+//メニュー画面へ遷移
 returnMenuBtn.forEach((btn) => {
   btn.addEventListener("click", ()=> {
   allViewHidden();
