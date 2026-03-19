@@ -96,6 +96,8 @@ let counterNumber = "";
 //編集中の単語
 let underEditIndex = null;
 
+let selectedCategory = null;
+
 
 //問題エリアのみ表示
 function displayOnlyQuestionArea (){
@@ -499,6 +501,40 @@ function loadQuiz (){
   }
 }
 
+//カテゴリーボタン生成
+function generateCategoryBtns(){
+  const container = document.getElementById("category-btns-container");
+  container.innerHTML = "";
+
+  const allWords = getLocalStorageData();
+  const uniqueCategories = [...new Set(allWords.map(word => word.category))].filter(cat => cat);
+
+  uniqueCategories.forEach(category => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "category-btn";
+    btn.textContent = category; //uniqueCategories配列の中のユーザーが登録したカテゴリー名
+    btn.dataset.category = category;
+
+    container.appendChild(btn);
+  });
+}
+
+function displayCategoryBtn(){
+  const currentList = getLocalStorageData();
+  const categoryBtn = document.querySelectorAll(".category-btn");
+
+  categoryBtn.forEach((btn)=> {
+    btn.addEventListener("click", ()=> {
+      const clickedCategory = btn.dataset.category;
+      const targetWords = currentList.filter(word => word.category === clickedCategory);
+      shuffledQuestions = targetWords;
+
+      shuffleQuestions();
+      newSetQuestion();
+    })
+  });
+}
 
 //イベント
 
@@ -536,24 +572,7 @@ questionNewStartBtn.addEventListener("click", ()=> {
   }
 
   generateCategoryBtns();
-
-  function generateCategoryBtns(){
-    const container = document.getElementById("category-btns-container");
-    container.innerHTML = "";
-
-    const allWords = getLocalStorageData();
-    const uniqueCategories = [...new Set(allWords.map(word => word.category))].filter(cat => cat);
-
-    uniqueCategories.forEach(category => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "category-btn";
-      btn.textContent = category; //uniqueCategories配列の中のユーザーが登録したカテゴリー名
-      btn.dataset.category = category;
-
-      container.appendChild(btn);
-    })
-  }
+  displayCategoryBtn();
 
   modeSelectArea.classList.add("active");
   modalOverlay.classList.remove("hidden");
@@ -566,7 +585,6 @@ questionNewStartBtn.addEventListener("click", ()=> {
   // newSetQuestion();
   // saveData();
 });
-
 
 
 //保存データからのスタート

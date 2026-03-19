@@ -65,8 +65,9 @@ header {
   font-family: var(--english);
 }
 
+.close-btn,
 .return-menu-btn {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-family: var(--japanese);
   font-weight: 500;
   padding: 10px 0;
@@ -165,7 +166,7 @@ main {
   border-radius: var(--radius);
   box-shadow: var(--itemShadow);
   display: grid;
-  grid-template-rows: 15% 15% 20%;
+  grid-template-rows: 30% 10% 10%;
   gap: 20px;
   place-items: center;
   width: 70%;
