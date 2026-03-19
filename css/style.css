@@ -408,7 +408,7 @@ main {
   box-shadow: var(--itemShadow);
   border-radius: var(--radius);
   display: grid;
-  grid-template-rows: 15% 15% 15% 28% 20%;
+  grid-template-rows: 15% 15% 15% 25% 19%;
   gap: var(--space-m);
   place-items: center;
   width: 100%;

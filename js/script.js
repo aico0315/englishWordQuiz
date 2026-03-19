@@ -349,6 +349,7 @@ function wordDelete (){
 
       const clickedIndex = Number(btn.dataset.index);
       underEditIndex = clickedIndex;
+      inputCategory.value = userAddedRecords[clickedIndex].category ? userAddedRecords[clickedIndex].category : "";
       inputEnglishWord.value = userAddedRecords[clickedIndex].question ? userAddedRecords[clickedIndex].question : "";
       inputJapaneseWord.value = userAddedRecords[clickedIndex].answer ? userAddedRecords[clickedIndex].answer : "";
       inputSupplementaryInformation.value = userAddedRecords[clickedIndex].supplement ? userAddedRecords[clickedIndex].supplement : "";
@@ -360,6 +361,8 @@ function wordDelete (){
 
   //キャンセルbtn実行
   cancelBtn.addEventListener("click", ()=>{
+    editAreaWordList.scrollIntoView({behavior: "smooth"});
+    inputCategory.value = "";
     inputEnglishWord.value = "";
     inputJapaneseWord.value = "";
     inputSupplementaryInformation.value = "";
