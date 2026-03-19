@@ -56,6 +56,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  z-index: 100;
 }
 
 .counter-area {
@@ -708,6 +709,7 @@ body.dark-mode .retry-btn {
 }
 
 body.dark-mode .menu-item,
+body.dark-mode .close-btn,
 body.dark-mode .return-menu-btn,
 body.dark-mode .dark-mode-btn {
   color: var(--darkModeFontColor);
