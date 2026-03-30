@@ -512,17 +512,26 @@ main {
 #editArea-wordList {
   margin: 40px 0;
   display: grid;
-  gap: var(--space-s);
+  gap: var(--space-l);
   font-size: 1.6rem;
+  height: auto;
 }
 
-.word-list {
+.word-summary {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   border-radius: var(--radius);
   box-shadow: var(--itemShadow);
   padding: var(--space-s);
+}
+
+.word-summary {
+  justify-self: end;
+}
+
+.word-summary-mark {
+  text-align: end;
 }
 
 .word-item {
@@ -543,25 +552,25 @@ main {
   text-align: start;
 }
 
-.accordion-area {
+.word-footer {
   display: grid;
   grid-template-columns: 1fr 0.18fr 0.18fr;
-  max-height: 0;      /* 高さを0に */
-  margin-top: -7px;
-  overflow: hidden;    /* はみ出た中身を隠す */
-  opacity: 0;
+  padding: 2px;
   transition: max-height 0.4s ease, background-color 0.6s ease, opacity 0.8s ease;
 }
 
-.accordion-area.active {
+.word-footer p {
+  padding-left: 20px;
+}
+
+.word-footer {
   display: grid;
   grid-template-columns: 1fr 0.18fr 0.18fr;
   background-color: var(--btnColor);
   border-radius: var(--radius);
   max-height: 100px;  /* 中身が入る十分な高さを指定 */
-  opacity: 1;
   align-items: center;
-  margin-top: -7px;
+  margin-top: 2px;
   transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
@@ -579,8 +588,8 @@ main {
 }
 .edit-btn-img,
 .delete-btn-img {
-  width: 100%;
-  height: 100%;
+  width: 16px;
+  /* height: 100%; */
 }
 
 
