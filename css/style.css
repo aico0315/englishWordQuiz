@@ -555,28 +555,18 @@ main {
 .word-footer {
   display: grid;
   grid-template-columns: 1fr 0.18fr 0.18fr;
-  padding: 2px;
-  transition: max-height 0.4s ease, background-color 0.6s ease, opacity 0.8s ease;
-}
-
-.word-footer p {
-  padding-left: 20px;
-}
-
-.word-footer {
-  display: grid;
-  grid-template-columns: 1fr 0.18fr 0.18fr;
   background-color: var(--btnColor);
   border-radius: var(--radius);
   max-height: 100px;  /* 中身が入る十分な高さを指定 */
   align-items: center;
+  padding: 2px;
   margin-top: 2px;
   transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
-.supplement {
+.word-footer p {
+  padding-left: 20px;
   white-space: pre-wrap;
-  margin: var(--space-s);
 }
 
 .edit-btn,
@@ -712,7 +702,8 @@ body.dark-mode .judgement-answer-btn,
 body.dark-mode .next-question-btn,
 body.dark-mode .add-btn,
 body.dark-mode .cancel-btn,
-body.dark-mode .retry-btn {
+body.dark-mode .retry-btn,
+body.dark-mode .word-footer {
   color: var(--darkModeFontColor);
   background-color: var(--darkModeBtnColor);
 }
