@@ -322,14 +322,15 @@ function wordRevised (){
   const answerArray = userInputJapanese;
 
   const currentList = getLocalStorageData();
-  const updateWord = currentList.map((word, i)=> {
-    if(i === underEditId){
+  const updateWord = currentList.map((word)=> {
+    if(String(word.id) === String(underEditId)){
       return {
-        id: userInput.id,
+        id: word.id,
         category: userInput.category,
         question: userInput.english,
         answer: answerArray,
         supplement: userInput.supplement,
+        wrongCount: word.wrongCount, // 苦手回数も消えないように引き継ぐ
       }
     }else{
       return word;
