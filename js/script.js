@@ -590,7 +590,12 @@ function generateCategoryBtns(){
   container.innerHTML = "";
 
   const allWords = getLocalStorageData();
-  const uniqueCategories = [...new Set(allWords.map(word => word.category))].filter(cat => cat);
+  const uniqueCategories = [...new Set(allWords.map(word => word.category ? word.category : "未設定"))]
+    .sort((a, b) => {
+      if (a === "未設定") return 1;  // aが未設定なら、bより後ろ(1)にする
+      if (b === "未設定") return -1; // bが未設定なら、aを前(-1)にする
+      return a.localeCompare(b, 'ja'); // それ以外は日本語の辞書順で並べる;
+    });
 
   uniqueCategories.forEach(category => {
     const btn = document.createElement("button");
@@ -603,6 +608,7 @@ function generateCategoryBtns(){
   });
 }
 
+//実際にボタンを押した時の表示
 function displayCategoryBtn(){
   const currentList = getLocalStorageData();
   const categoryBtn = document.querySelectorAll(".category-btn");
@@ -610,9 +616,15 @@ function displayCategoryBtn(){
   categoryBtn.forEach((btn)=> {
     btn.addEventListener("click", ()=> {
       const clickedCategory = btn.dataset.category;
-      const targetWords = currentList.filter(word => word.category === clickedCategory);
-      shuffledQuestions = targetWords;
+      const targetWords = currentList.filter(word => {
+        if(clickedCategory === "未設定"){
+          return word.category === "" || !word.category;
+        }else {
+          return word.category === clickedCategory;
+        }
+      });
 
+      shuffledQuestions = targetWords;
       shuffleQuestions();
       newSetQuestion();
     })
