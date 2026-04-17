@@ -12,7 +12,7 @@ const resultMessageIconRight = document.querySelector(".result-message-icon-righ
 const clearImgArea = document.querySelector(".clear-img-area");
 
 const body = document.querySelector("body");
-const darkModeToggleBtn = document.getElementById("dark-mode-toggle-btn");
+const themeToggle = document.querySelector(".theme-toggle");
 const webTitle = document.querySelector(".web-title");
 
 // メニューエリア変数
@@ -97,6 +97,9 @@ let counterNumber = "";
 let underEditId = null;
 
 let selectedCategory = null;
+
+//ダークモード状態
+let isDark = false
 
 
 //問題エリアのみ表示
@@ -650,16 +653,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
   menuViewDisplay();
 });
 
-// == dark-mode ==
-darkModeToggleBtn.addEventListener("click", ()=>{
-  body.classList.toggle("dark-mode");
-  localStorage.setItem("isDarkMode", JSON.stringify(isDarkMode()));
+// ==== dark-mode ====
+themeToggle.addEventListener("click", () => {
+  isDark = !isDark;
+  themeToggle.classList.toggle("darkMode");
+  document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+  localStorage.setItem("theme", isDark ? "dark" : "light");
 });
 
 // == menu-area ==
 
 //はじめるbtn
-questionNewStartBtn.addEventListener("click", ()=> {
+questionNewStartBtn.addEventListener("click", () => {
   const userWords = getLocalStorageData();
 
   if(userWords.length === 0){
@@ -670,17 +675,13 @@ questionNewStartBtn.addEventListener("click", ()=> {
   generateCategoryBtns();
   displayCategoryBtn();
 
-  modeSelectArea.classList.add("active");
-  modalOverlay.classList.remove("hidden");
+  modalOverlay.classList.remove("hidden"); // ① まずoverylayを表示
 
-  // currentIndex = 0;
-  // userAddedRecords = userWords;
-  // shuffledQuestions = userWords;
-
-  // shuffleQuestions();
-  // newSetQuestion();
-  // saveData();
+  setTimeout(() => {
+    modeSelectArea.classList.add("active"); // ② 少し遅らせてアニメーション開始
+  }, 10);
 });
+
 
 
 //保存データからのスタート

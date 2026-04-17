@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   /* color変数 */
   --baseColor: rgb(255, 253, 249);
@@ -82,16 +86,20 @@ header {
 header {
   width: 100vw;
   height: 50px;
+  box-shadow: 1px 2px 7px rgba(68, 51, 34, 0.355);
 }
 
 header h1{
+  width: 130px;
+  height: 50px;
   color: var(--mainColor);
   text-shadow: var(--textShadow);
   font-family:'Times New Roman', Times, serif;
   font-weight: 700;
   font-size: 3rem;
   padding: 10px;
-  height: 7%;
+  text-align: center;
+  /* height: 7%; */
 }
 /* header */
 
@@ -119,12 +127,12 @@ main {
 }
 
 .menu-list {
-  background-color: var(--sectionBaseColor);
+  /* background-color: var(--sectionBaseColor);
   box-shadow: var(--itemShadow);
-  border-radius: var(--radius);
+  border-radius: var(--radius); */
   display: grid;
   place-items: center;
-  grid-template-rows: 25% 25% 40%;
+  grid-template-rows: 25% 25% 60%;
   width: 100%;
   height: 80%;
 }
@@ -157,13 +165,14 @@ main {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  transition: max-height 0.4s ease, background-color 0.6s ease, opacity 0.8s ease;
+  opacity: 0;
+  transform: translate(-50%, -60%); /* 中央揃え＋少し上 */
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .mode-select-area.active {
-  opacity: 1;
   z-index: 100;
+  background-color: var(--baseColor);
   border-radius: var(--radius);
   box-shadow: var(--itemShadow);
   display: grid;
@@ -177,8 +186,8 @@ main {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  transition: max-height 0.4s ease, background-color 0.6s ease, opacity 0.8s ease;
+  opacity: 1;
+  transform: translate(-50%, -50%); /* 中央揃えに戻す */
 }
 
 .category-btns-container {
@@ -210,7 +219,7 @@ main {
 }
 
 .counter-and-img-area {
-  margin-top: var(--space-s);
+  margin-top: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
@@ -320,14 +329,16 @@ main {
 
 .result-message-icon-left,
 .result-message-icon-right {
+  display: flex;
+  justify-content: center;
   width: 100px;
   /* height: 110px; */
 }
 
 .result-message-icon-left img,
 .result-message-icon-right img {
-  width: 100%;
-  height: 100%;
+  width: 70%;
+  height: 70%;
 }
 
 
@@ -410,9 +421,9 @@ main {
 }
 
 .add-area {
-  background-color: var(--sectionBaseColor);
+  /* background-color: var(--sectionBaseColor);
   box-shadow: var(--itemShadow);
-  border-radius: var(--radius);
+  border-radius: var(--radius); */
   display: grid;
   grid-template-rows: 15% 15% 15% 25% 19%;
   gap: var(--space-m);
@@ -597,14 +608,11 @@ summary {
 .clear-area {
   display: grid;
   place-items: center;
-  grid-template-rows: 30% 15% 20% 3%;
+  grid-template-rows: 25% 15% 20% 3%;
   gap: var(--space-m);
   margin-top: var(--space-l);
   width: 100%;
   height: 80%;
-  background-color: var(--baseColor);
-  box-shadow: var(--itemShadow);
-  border-radius: 4px;
   z-index: 10;
 }
 
@@ -619,6 +627,7 @@ summary {
   font-size: 2.4rem;
   font-family: var(--japanese);
   line-height: 1.4;
+  text-align: center;
 }
 
 .clear-img-area {
@@ -649,13 +658,40 @@ summary {
 /*===================
     dark-mode style
 ===================*/
-.dark-mode-btn {
-  font-size: 1.6rem;
-  font-family: var(--english);
-  font-weight: 500;
-  color: var(--btnTextColor);
-  padding: var(--space-s);
+.theme-toggle {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  margin: var(--space-m);
+  border-radius: 12px;
+  background: var(--mainColor);       /* ライトモード時の背景色 */
+  border: none;
+  cursor: pointer;
+  transition: back-ground 0.3s;
 }
+
+.theme-toggle.darkMode {
+  background: #291d1295;
+  outline: 1.5px solid #6f5f4e;
+}
+
+.knob {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  top: 3px;
+  left: 25px;          /* ライトモード：右側 */
+  transition: left 0.25s ease;  /* ← ここがスライドアニメーション */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.darkMode .knob {
+  top: 3px;
+  left: 3px;  /* ダークモード時は左側に移動 */
+}
+
 
 /* デフォルト（昼） */
 body {
@@ -664,65 +700,65 @@ body {
   transition: background-color 0.3s, color 0.3s; /* じわ〜っと色を変える魔法 */
 }
 
-body.dark-mode header h1 {
+[data-theme = "dark"] header h1 {
   color: var(--darkModeFontColor);
 }
 
 /* ダークモード（夜） */
-body.dark-mode,
-body.dark-mode input,
-body.dark-mode textarea,
-body.dark-mode .menu-list,
-body.dark-mode .set-question,
-body.dark-mode .user-answer,
-body.dark-mode .supplement-message,
-body.dark-mode .add-area,
-body.dark-mode .add-category-area,
-body.dark-mode .add-english-area,
-body.dark-mode .add-japanese-area,
-body.dark-mode .add-supplement-area,
-body.dark-mode .word-item,
-body.dark-mode .accordion-area.active,
-/* body.dark-mode .supplement, */
-body.dark-mode .correct-answer-area,
-body.dark-mode .user-answer-title,
-body.dark-mode .clear-area,
-body.dark-mode .clear-area p {
+[data-theme = "dark"] body,
+[data-theme = "dark"] input,
+[data-theme = "dark"] textarea,
+[data-theme = "dark"] .menu-list,
+[data-theme = "dark"] .set-question,
+[data-theme = "dark"] .user-answer,
+[data-theme = "dark"] .supplement-message,
+[data-theme = "dark"] .add-area,
+[data-theme = "dark"] .add-category-area,
+[data-theme = "dark"] .add-english-area,
+[data-theme = "dark"] .add-japanese-area,
+[data-theme = "dark"] .add-supplement-area,
+[data-theme = "dark"] .word-item,
+[data-theme = "dark"] .accordion-area.active,
+/* [data-theme = "dark"] .supplement, */
+[data-theme = "dark"] .correct-answer-area,
+[data-theme = "dark"] .user-answer-title,
+[data-theme = "dark"] .clear-area,
+[data-theme = "dark"] .clear-area p {
   background-color: var(--darkModeBaseColor); /* 濃いグレー */
   color: var(--darkModeFontColor);            /* 柔らかい白 */
 }
 
-/* body.dark-mode, */
-body.dark-mode input,
-body.dark-mode textarea,
-body.dark-mode .menu-list,
-body.dark-mode .set-question,
-body.dark-mode .correct-answer-area,
-body.dark-mode .user-answer-area,
-body.dark-mode .add-area,
-body.dark-mode .word-list,
-body.dark-mode .clear-area {
+/* [data-theme = "dark"], */
+[data-theme = "dark"] input,
+[data-theme = "dark"] textarea,
+[data-theme = "dark"] .menu-list,
+[data-theme = "dark"] .set-question,
+[data-theme = "dark"] .correct-answer-area,
+[data-theme = "dark"] .user-answer-area,
+[data-theme = "dark"] .add-area,
+[data-theme = "dark"] .word-list,
+[data-theme = "dark"] .clear-area {
   border: var(--darkModeBorderStyle);
   box-shadow: var(--darkModeItemShadow);
 }
 
-body.dark-mode .judgement-answer-btn,
-body.dark-mode .next-question-btn,
-body.dark-mode .add-btn,
-body.dark-mode .cancel-btn,
-body.dark-mode .retry-btn,
-body.dark-mode .word-footer {
+[data-theme = "dark"] .judgement-answer-btn,
+[data-theme = "dark"] .next-question-btn,
+[data-theme = "dark"] .add-btn,
+[data-theme = "dark"] .cancel-btn,
+[data-theme = "dark"] .retry-btn,
+[data-theme = "dark"] .word-footer {
   color: var(--darkModeFontColor);
   background-color: var(--darkModeBtnColor);
 }
 
-body.dark-mode .menu-item,
-body.dark-mode .close-btn,
-body.dark-mode .return-menu-btn,
-body.dark-mode .dark-mode-btn {
+[data-theme = "dark"] .menu-item,
+[data-theme = "dark"] .close-btn,
+[data-theme = "dark"] .return-menu-btn,
+[data-theme = "dark"] .dark-mode-btn {
   color: var(--darkModeFontColor);
 }
 
-body.dark-mode .accordion-area.active {
+[data-theme = "dark"] .accordion-area.active {
   background-color: var(--darkModeBtnColor);
 }
