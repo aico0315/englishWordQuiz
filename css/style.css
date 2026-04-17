@@ -103,7 +103,7 @@ main {
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 0 var(--space-m);
+  padding: 0 var(--space-l);
 }
 
 /*===================
@@ -245,6 +245,7 @@ main {
   box-shadow: var(--itemShadow);
   border-radius: var(--radius);
   word-break: break-word;
+  padding: 10px;
 }
 
 #answer-form {
@@ -520,9 +521,13 @@ main {
   height: auto;
 }
 
+summary {
+  padding-bottom: 7px;
+}
+
 .word-summary {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 0.2fr;
   width: 100%;
   border-radius: var(--radius);
   box-shadow: var(--itemShadow);
