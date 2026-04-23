@@ -139,6 +139,7 @@ function displayOnlyAddQuestionArea (){
   const categoryList = document.getElementById("category-list");
   categoryList.innerHTML = "";
 
+  //カテゴリー名をサジェストとして表示
   uniqueCategories.forEach(category => {
     const option = document.createElement("option");
     option.value = category;
@@ -163,7 +164,7 @@ function allViewHidden (){
   addQuestionArea.classList.add("hidden");
 }
 
-//入力エリアをクリア
+//単語追加Viewの入力エリアを全クリア
 function wordInputAreaAllClear (){
   inputCategory.value = "";
   inputEnglishWord.value = "";

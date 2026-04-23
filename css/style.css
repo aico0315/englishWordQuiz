@@ -705,6 +705,7 @@ body {
 }
 
 /* ダークモード（夜） */
+/* 背景色・文字色 */
 [data-theme = "dark"] body,
 [data-theme = "dark"] input,
 [data-theme = "dark"] textarea,
@@ -719,7 +720,6 @@ body {
 [data-theme = "dark"] .add-supplement-area,
 [data-theme = "dark"] .word-item,
 [data-theme = "dark"] .accordion-area.active,
-/* [data-theme = "dark"] .supplement, */
 [data-theme = "dark"] .correct-answer-area,
 [data-theme = "dark"] .user-answer-title,
 [data-theme = "dark"] .clear-area,
@@ -728,20 +728,21 @@ body {
   color: var(--darkModeFontColor);            /* 柔らかい白 */
 }
 
-/* [data-theme = "dark"], */
+/* 枠線色・影 */
 [data-theme = "dark"] input,
 [data-theme = "dark"] textarea,
-[data-theme = "dark"] .menu-list,
+/* [data-theme = "dark"] .menu-list, */
 [data-theme = "dark"] .set-question,
 [data-theme = "dark"] .correct-answer-area,
 [data-theme = "dark"] .user-answer-area,
-[data-theme = "dark"] .add-area,
+/* [data-theme = "dark"] .add-area, */
 [data-theme = "dark"] .word-list,
 [data-theme = "dark"] .clear-area {
   border: var(--darkModeBorderStyle);
   box-shadow: var(--darkModeItemShadow);
 }
 
+/* ボタンの文字・背景色 */
 [data-theme = "dark"] .judgement-answer-btn,
 [data-theme = "dark"] .next-question-btn,
 [data-theme = "dark"] .add-btn,
@@ -752,6 +753,7 @@ body {
   background-color: var(--darkModeBtnColor);
 }
 
+/* 文字色 */
 [data-theme = "dark"] .menu-item,
 [data-theme = "dark"] .close-btn,
 [data-theme = "dark"] .return-menu-btn,
@@ -759,6 +761,7 @@ body {
   color: var(--darkModeFontColor);
 }
 
+/*  */
 [data-theme = "dark"] .accordion-area.active {
   background-color: var(--darkModeBtnColor);
 }
