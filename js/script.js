@@ -214,6 +214,7 @@ function isInputData (){
   return userInput;
 }
 
+//画像データを読み込み
 function preload(imgPaths){
   imgPaths.forEach((imgPath)=> {
     const preImg = new Image();
@@ -297,7 +298,7 @@ function addQuestionData (){
 
   const userInput = isInputData();
 
-  const userInputJapanese = userInput.japanese;
+  const userInputJapanese = userInput.japanese; //この2行はconst answerArray = userInput.japanese;の1行に書き換えられる
   const answerArray = userInputJapanese;
 
   const addQuestion = {
@@ -346,107 +347,86 @@ function wordRevised (){
   userAddedRecords = updateWord;
 }
 
-//登録された単語データを取得
+//localStorageに登録された単語データを取得
 function getLocalStorageData (){
   const savedUserWords = localStorage.getItem('userWords');
   return savedUserWords ? JSON.parse(savedUserWords) : [];
 }
 
-//登録単語の削除
-function wordDelete (){
-  editAreaWordList.innerHTML = "";
-
-  const allWords = getLocalStorageData();
-  const uniqueCategories = [...new Set(allWords.map(word => word.category || "未設定"))];
-    //結果、["IT用語", "日常英会話", "", "", ....]という親のリストができる
+//カテゴリーを取得・並び替えして返す
+function getSortedCategories (wordsArray){
+  //結果、["IT用語", "日常英会話", "", "", ....]という親のリストができる
+  const uniqueCategories = [...new Set(wordsArray.map(word => word.category || "未設定"))];
 
   // 2. 「未設定」を一番下にするための並び替えルール
   uniqueCategories.sort((a, b) => {
-    if (a === "未設定") return 1;  // aが未設定なら、bより後ろ(1)にする
-    if (b === "未設定") return -1; // bが未設定なら、aを前(-1)にする
-    return a.localeCompare(b, 'ja'); // それ以外は日本語の辞書順で並べる
+     if (a === "未設定") return 1;  // aが未設定なら、bより後ろ(1)にする
+     if (b === "未設定") return -1; // bが未設定なら、aを前(-1)にする
+     return a.localeCompare(b, 'ja'); // それ以外は日本語の辞書順で並べる
   });
 
-  const categoryMap = {};
-  uniqueCategories.forEach(category => {
-    categoryMap[category] = userAddedRecords.filter(word => (word.category || "未設定") === category);
+  return uniqueCategories;
+}
 
-    const categoryDetails = document.createElement("details");
-    const categorySummary = document.createElement("summary");
-    categorySummary.textContent = category;
-    categoryDetails.appendChild(categorySummary);
+//カテゴリーで単語を絞り込んで返す
+function getWordsByCategory (wordsArray, category){
+  return wordsArray.filter(word => (word.category || "未設定") === category);
+}
 
-    categoryMap[category].forEach(word => {
-      const wordDetails = document.createElement("details");
-      const wordSummary = document.createElement("summary");
-      wordSummary.classList.add("word-summary");
-      const wordSummaryQuestion = document.createElement("span");
-      const wordSummaryAnswer = document.createElement("span");
-      const wordSummaryMark = document.createElement("span");
-      wordSummaryMark.classList.add("word-summary-mark");
-      const wordFooter = document.createElement("div");
-      wordFooter.classList.add("word-footer");
+//内側のHTML(アコーディオン)を作成する(この関数はcreateCategoryElement関数内で呼び出す) 
+function createWordElement (word){
+  const wordDetails = document.createElement("details");
+  const wordSummary = document.createElement("summary");
+  wordSummary.classList.add("word-summary");
+  const wordSummaryQuestion = document.createElement("span");
+  const wordSummaryAnswer = document.createElement("span");
+  const wordSummaryMark = document.createElement("span");
+  wordSummaryMark.classList.add("word-summary-mark");
+  const wordFooter = document.createElement("div");
+  wordFooter.classList.add("word-footer");
 
-      const wordSupplement = document.createElement("p");
-      const editBtn = document.createElement("button");
-      editBtn.classList.add("edit-btn");
-      editBtn.dataset.id = word.id;
-      const deleteBtn = document.createElement("button");
-      deleteBtn.classList.add("delete-btn");
-      deleteBtn.dataset.id = word.id;
+  const wordSupplement = document.createElement("p");
+  const editBtn = document.createElement("button");
+  editBtn.classList.add("edit-btn");
+  editBtn.dataset.id = word.id;
+  const deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("delete-btn");
+  deleteBtn.dataset.id = word.id;
 
-      wordSummaryQuestion.textContent = `${word.question}`;
-      wordSummaryAnswer.textContent = `/ ${word.answer[0]}`;
-      wordSummaryMark.textContent = `︙`;
-      wordSummary.appendChild(wordSummaryQuestion);
-      wordSummary.appendChild(wordSummaryAnswer);
-      wordSummary.appendChild(wordSummaryMark);
+  wordSummaryQuestion.textContent = `${word.question}`;
+  wordSummaryAnswer.textContent = `/ ${word.answer[0]}`;
+  wordSummaryMark.textContent = `︙`;
+  wordSummary.appendChild(wordSummaryQuestion);
+  wordSummary.appendChild(wordSummaryAnswer);
+  wordSummary.appendChild(wordSummaryMark);
 
-      wordSupplement.textContent = `${word.supplement}`;
-      editBtn.innerHTML = `<button><img class="edit-btn-img" src="image/subImage/editBtn@72x.webp"></button>`;
-      deleteBtn.innerHTML = `<img class="delete-btn-img" src="image/subImage/deleteBtn@72x.webp">`;
+  wordSupplement.textContent = `${word.supplement}`;
+  editBtn.innerHTML = `<button><img class="edit-btn-img" src="image/subImage/editBtn@72x.webp"></button>`;
+  deleteBtn.innerHTML = `<img class="delete-btn-img" src="image/subImage/deleteBtn@72x.webp">`;
 
-      wordDetails.appendChild(wordSummary);
-      wordFooter.appendChild(wordSupplement);
-      wordFooter.appendChild(editBtn);
-      wordFooter.appendChild(deleteBtn);
-      wordDetails.appendChild(wordFooter);
+  wordDetails.appendChild(wordSummary);
+  wordFooter.appendChild(wordSupplement);
+  wordFooter.appendChild(editBtn);
+  wordFooter.appendChild(deleteBtn);
+  wordDetails.appendChild(wordFooter);
 
-      categoryDetails.appendChild(wordDetails);
-  });
+  return wordDetails;
+}
 
-  editAreaWordList.appendChild(categoryDetails);
-});
+//外側のHTML(アコーディオン)を作成する(関数内で内側のHTML作成の関数を呼び出す)
+function createCategoryElement (words, category){
+  const categoryDetails = document.createElement("details");
+  const categorySummary = document.createElement("summary");
+  categorySummary.textContent = category;
+  categoryDetails.appendChild(categorySummary);
 
-  const editBtn = document.querySelectorAll(".edit-btn");
-  const deleteBtn = document.querySelectorAll(".delete-btn");
+  const wordElements = words.map(word => createWordElement(word)); //内側のHTML(アコーディオン)を作成する(この関数はcreateCategoryElement関数内で呼び出す)
+  categoryDetails.append(...wordElements);
+  return categoryDetails;
+}
 
-  //単語編集ボタン実行
-  editBtn.forEach((btn)=> {
-    btn.addEventListener("click", ()=>{
-      const clickedId = btn.dataset.id;
-      underEditId = clickedId;
-
-      const targetWord = allWords.find(word => String(word.id) === String(clickedId));
-
-      if(targetWord){
-        inputCategory.value = targetWord.category ? targetWord.category : "";
-        inputEnglishWord.value = targetWord.question ? targetWord.question : "";
-        inputJapaneseWord.value = targetWord.answer ? targetWord.answer : "";
-        inputSupplementaryInformation.value = targetWord.supplement ? targetWord.supplement : "";
-      }
-
-      // console.log("比較する相手のID:", clickedId);
-      // console.log("名簿のID:", userAddedRecords[0].id); // 1つ目のデータを確認
-      // console.log("現在選択された単語は", targetWord.question);
-
-      const buttonLabel = underEditId === null ? "登録" : "更新";
-      addBtn.textContent = buttonLabel;
-      addQuestionArea.scrollIntoView({behavior: "smooth"});
-    })
-  });
-
-  //キャンセルbtn実行
+//キャンセルbtn実行
+function setupCancelButtons (){
   cancelBtn.addEventListener("click", ()=>{
     editAreaWordList.scrollIntoView({behavior: "smooth"});
     inputCategory.value = "";
@@ -455,18 +435,47 @@ function wordDelete (){
     inputSupplementaryInformation.value = "";
     addBtn.textContent = "登録";
   });
+}
 
-  //単語の削除ボタン実行
+//単語編集ボタン実行
+function setupEditButtons (wordArray){
+  const editBtn = document.querySelectorAll(".edit-btn");
+  editBtn.forEach((btn)=> {
+    btn.addEventListener("click", ()=>{
+      const clickedId = btn.dataset.id;
+      underEditId = clickedId;
+
+      const targetWord = wordArray.find(word => String(word.id) === String(clickedId));
+
+      if(targetWord){
+        inputCategory.value = targetWord.category ? targetWord.category : "";
+        inputEnglishWord.value = targetWord.question ? targetWord.question : "";
+        inputJapaneseWord.value = targetWord.answer ? targetWord.answer : "";
+        inputSupplementaryInformation.value = targetWord.supplement ? targetWord.supplement : "";
+      }
+
+      const buttonLabel = underEditId === null ? "登録" : "更新";
+      addBtn.textContent = buttonLabel;
+      addQuestionArea.scrollIntoView({behavior: "smooth"});
+    })
+  });
+
+  setupCancelButtons();
+}
+
+//単語の削除ボタン実行
+function setupDeleteButtons (wordArray){
+  const deleteBtn = document.querySelectorAll(".delete-btn");
   deleteBtn.forEach((btn)=> {
     btn.addEventListener("click", ()=> {
       const clickedId = btn.dataset.id;
-      const targetWord = allWords.find(word => String(word.id) === String(clickedId));
+      const targetWord = wordArray.find(word => String(word.id) === String(clickedId));
 
       const isDelete = confirm(`本当に${targetWord.question}を削除しますか？`);
       if(!isDelete){
         return;
       }else{
-        const editedWordsList = userAddedRecords.filter((word, i)=> i !== clickedId);
+        const editedWordsList = userAddedRecords.filter((word)=> word.id !== clickedId);
         alert("削除しました");
         userAddedRecords = editedWordsList;
         localStorage.setItem("userWords", JSON.stringify(userAddedRecords));
@@ -474,6 +483,22 @@ function wordDelete (){
       }
     });
   });
+}
+
+//登録単語の削除
+function wordDelete (){
+  editAreaWordList.innerHTML = "";
+  const allWords = getLocalStorageData();
+  const uniqueCategories = getSortedCategories(allWords);
+
+  uniqueCategories.forEach(category => {
+    const words = getWordsByCategory(allWords, category); //カテゴリーで単語を絞り込んで返す
+    const categoryDetails = createCategoryElement(words, category); //外側のHTML(アコーディオン)を作成する(関数内で内側のHTML作成の関数を呼び出す)
+    editAreaWordList.appendChild(categoryDetails);
+  });
+
+  setupEditButtons(allWords);
+  setupDeleteButtons(allWords);
 }
 
 
