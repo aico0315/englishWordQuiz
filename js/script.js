@@ -374,7 +374,7 @@ function getWordsByCategory (wordsArray, category){
 }
 
 //内側のHTML(アコーディオン)を作成する(この関数はcreateCategoryElement関数内で呼び出す) 
-function createWordElement (word){
+function createWordElement (word, index){
   const wordDetails = document.createElement("details");
   const wordSummary = document.createElement("summary");
   wordSummary.classList.add("word-summary");
@@ -393,7 +393,7 @@ function createWordElement (word){
   deleteBtn.classList.add("delete-btn");
   deleteBtn.dataset.id = word.id;
 
-  wordSummaryQuestion.textContent = `${word.question}`;
+  wordSummaryQuestion.textContent = `${index}. ${word.question}`;
   wordSummaryAnswer.textContent = `/ ${word.answer[0]}`;
   wordSummaryMark.textContent = `︙`;
   wordSummary.appendChild(wordSummaryQuestion);
@@ -420,7 +420,7 @@ function createCategoryElement (words, category){
   categorySummary.textContent = category;
   categoryDetails.appendChild(categorySummary);
 
-  const wordElements = words.map(word => createWordElement(word)); //内側のHTML(アコーディオン)を作成する(この関数はcreateCategoryElement関数内で呼び出す)
+  const wordElements = words.map((word, index)=> createWordElement(word, index + 1)); //内側のHTML(アコーディオン)を作成する(この関数はcreateCategoryElement関数内で呼び出す)
   categoryDetails.append(...wordElements);
   return categoryDetails;
 }
@@ -475,7 +475,7 @@ function setupDeleteButtons (wordArray){
       if(!isDelete){
         return;
       }else{
-        const editedWordsList = userAddedRecords.filter((word)=> word.id !== clickedId);
+        const editedWordsList = userAddedRecords.filter((word)=> String(word.id) !== String(clickedId));
         alert("削除しました");
         userAddedRecords = editedWordsList;
         localStorage.setItem("userWords", JSON.stringify(userAddedRecords));
